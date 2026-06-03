@@ -34,7 +34,7 @@ author:
 
   # Academic websites
   academia         : # URL
-  arxiv            : "https://arxiv.org/search/?searchtype=author&query=Tariolle%2C+F"
+  arxiv            : # URL
   googlescholar    : "https://scholar.google.com/citations?user=z5QWV8kAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
