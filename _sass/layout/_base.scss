@@ -340,9 +340,30 @@ nav {
   }
 
 /* Global animation transition */
-b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a, tr, td, form button, input[type="submit"], .btn, .highlight, .archive__item-teaser {
-  -webkit-transition: $global-transition;
-  transition: $global-transition;
+body,
+b, i, strong, em, blockquote, p, q, span, figure, img,
+h1, h2, h3, h4, h5, h6,
+header, footer, main, section, article,
+ul, ol, li, dl, dt, dd,
+input, textarea, select, a, tr, th, td, form button, input[type="submit"],
+.page__footer,
+.page__footer-copyright,
+.page__footer-follow,
+.btn,
+.highlight,
+.archive__item-teaser {
+  -webkit-transition:
+    color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out,
+    fill 0.2s ease-in-out,
+    stroke 0.2s ease-in-out;
+  transition:
+    color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out,
+    fill 0.2s ease-in-out,
+    stroke 0.2s ease-in-out;
 }
 
 /* ==========================================================================

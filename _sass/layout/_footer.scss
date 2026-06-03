@@ -41,7 +41,7 @@
   }
 
   a {
-    color: inherit;
+    color: var(--global-text-color-light);
     text-decoration: none;
 
     &:hover {
@@ -58,6 +58,7 @@
 }
 
 .page__footer-copyright {
+  color: var(--global-text-color-light);
   font-family: $global-font-family;
   font-size: $type-size-7;
 }
