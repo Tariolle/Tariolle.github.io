@@ -159,7 +159,7 @@
 
     @include breakpoint($large) {
       padding: 5px;
-      background-color: var(--global-text-color-light);
+      background-color: var(--global-bg-color);
       border: 1px solid var(--global-text-color-light);
     }
   }
