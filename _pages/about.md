@@ -18,7 +18,7 @@ I am seeking a six-month final-year research internship in deep learning startin
 Research interests
 ======
 
-- Deep learning
-- Representation learning
-- World models and deep reinforcement learning
-- Adversarial machine learning
+- Deep Learning
+- Representation Learning
+- World Models and Deep Reinforcement Learning
+- Adversarial Machine Learning
