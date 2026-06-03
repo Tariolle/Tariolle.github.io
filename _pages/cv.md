@@ -8,13 +8,6 @@ redirect_from:
 ---
 
 {% assign cv_pdf_url = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/master/main.pdf" %}
-{% assign cv_source_url = "https://github.com/Tariolle/curriculum-vitae" %}
-
-<div class="cv-actions">
-  <a href="{{ cv_pdf_url }}">Open PDF</a> /
-  <a href="{{ cv_pdf_url }}" download>Download PDF</a> /
-  <a href="{{ cv_source_url }}">Source</a>
-</div>
 
 <div class="cv-pdf-viewer">
   <iframe id="cv-pdf-frame" class="cv-pdf-frame" title="Florent Tariolle CV"></iframe>
