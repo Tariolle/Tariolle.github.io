@@ -189,7 +189,7 @@
     }
   }
 
-  button {
+  .greedy-nav__toggle {
     position: absolute;
     height: 2.5rem;
     right: 0;
@@ -225,12 +225,57 @@
       }
     }
 
-    #theme-toggle {
-      a {
-        width: 25px;
-        display: flex;
-        justify-content: center;
-        cursor: pointer;
+    .theme-toggle {
+      position: relative;
+      width: 34px;
+      height: 34px;
+      margin-left: 0.5rem;
+      padding: 0.45rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      appearance: none;
+      cursor: pointer;
+      color: var(--global-text-color-light);
+      background: transparent;
+      border: 1px solid var(--global-border-color);
+      border-radius: 0.5rem;
+      line-height: 1;
+      transition: color 0.3s ease, border-color 0.3s ease;
+
+      &:hover {
+        color: var(--global-text-color);
+        border-color: var(--global-text-color-light);
+      }
+    }
+
+    .theme-toggle__icon {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .theme-toggle__icon--sun {
+      opacity: 0;
+      transform: scale(0.5) translateY(20px);
+    }
+
+    .theme-toggle__icon--moon {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    html[data-theme="dark"] & {
+      .theme-toggle__icon--sun {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      .theme-toggle__icon--moon {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
       }
     }
 
