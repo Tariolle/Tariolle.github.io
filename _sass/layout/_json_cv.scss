@@ -2,6 +2,38 @@
    JSON CV
    ========================================================================== */
 
+.cv-actions {
+  margin-bottom: 1rem;
+}
+
+.cv-pdf-viewer {
+  min-height: 70vh;
+  overflow: hidden;
+  border: 1px solid var(--global-border-color);
+  border-radius: $border-radius;
+  background: var(--global-bg-color);
+}
+
+.cv-pdf-frame {
+  display: block;
+  width: 100%;
+  height: min(1100px, calc(100vh - 140px));
+  min-height: 720px;
+  border: 0;
+  background: #fff;
+}
+
+.cv-pdf-fallback {
+  margin: 1rem;
+}
+
+@media (max-width: $large) {
+  .cv-pdf-frame {
+    height: 75vh;
+    min-height: 520px;
+  }
+}
+
 /* CV Template Styles */
 .cv-container {
   max-width: 1000px;

@@ -7,48 +7,52 @@ redirect_from:
   - /resume
 ---
 
-[Download full CV](https://github.com/Tariolle/curriculum-vitae/raw/master/main.pdf)
+{% assign cv_pdf_url = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/master/main.pdf" %}
+{% assign cv_source_url = "https://github.com/Tariolle/curriculum-vitae" %}
 
-Education
-======
+<div class="cv-actions">
+  <a href="{{ cv_pdf_url }}">Open PDF</a> /
+  <a href="{{ cv_pdf_url }}" download>Download PDF</a> /
+  <a href="{{ cv_source_url }}">Source</a>
+</div>
 
-- **INSA Rouen Normandy**, Engineering degree in Computer Science and AI, expected 2027.
-- **University of Rouen Normandy**, M.Sc. in Data Science, research-oriented MLAI track, expected 2027.
-- **Lycée Dupuy de Lôme**, CPGE MP, Mathematics and Physics, 2021-2023.
+<div class="cv-pdf-viewer">
+  <iframe id="cv-pdf-frame" class="cv-pdf-frame" title="Florent Tariolle CV"></iframe>
+  <p class="cv-pdf-fallback" hidden>
+    The embedded CV could not be loaded. <a href="{{ cv_pdf_url }}">Open the PDF directly</a>.
+  </p>
+</div>
 
-Research and industry experience
-======
+<script>
+  (() => {
+    const cvPdfUrl = "{{ cv_pdf_url }}";
+    const frame = document.getElementById("cv-pdf-frame");
+    const fallback = document.querySelector(".cv-pdf-fallback");
 
-- **Deep Learning Research Intern**, InterDigital, Rennes, France, May 2026-present. Working on deep learning methods for next-generation video compression, with focus on VVC (H.266) in-loop filtering and decoder-side filter selection.
-- **Academic Machine Learning Intern**, Enedis, Rouen, France, January 2026-present. Working on deep generative models and large-scale PySpark pipelines to simulate high-frequency time series for 38 million customers in support of a Digital Twin of the French electricity grid.
+    if (!frame || !window.fetch || !window.URL || !window.URL.createObjectURL) {
+      if (fallback) fallback.hidden = false;
+      return;
+    }
 
-Publications
-======
+    fetch(cvPdfUrl, { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("CV PDF fetch failed");
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const pdfBlob = blob.type === "application/pdf"
+          ? blob
+          : new Blob([blob], { type: "application/pdf" });
+        const objectUrl = URL.createObjectURL(pdfBlob);
 
-<ul>{% for post in site.publications reversed %}
-  {% include archive-single-cv.html %}
-{% endfor %}</ul>
-
-Research projects
-======
-
-- **SLS-WM: Structured Label Smoothing for Discrete World Models**, February 2026-present. Independent research project on topology-aware training objectives for discrete latent predictors and real-time Vision-Model-Controller deployment.
-- **Opportunistic Target Selection**, CAp 2026. Query-efficient black-box adversarial attack wrapper validated across 4,500 ImageNet attack runs.
-
-Open source
-======
-
-- **Rose**, co-founder and lead developer, September 2025-present. High-traffic real-time customization tool used by 15K+ daily active users.
-
-Awards and activities
-======
-
-- **Selected Participant, Hack the World(s) Hackathon**, June 2026. Selected for a 24-hour hackathon on world models, with 100 participants chosen from 650 candidates.
-
-Technical skills
-======
-
-- **Programming:** Python, C++.
-- **AI and ML:** PyTorch, JAX, NumPy, CUDA, deep learning, reinforcement learning, world models, adversarial ML.
-- **Data and systems:** Spark, distributed pipelines.
-- **Languages:** French native, English TOEIC 970/990.
+        frame.src = objectUrl;
+        window.addEventListener("pagehide", () => URL.revokeObjectURL(objectUrl), { once: true });
+      })
+      .catch(() => {
+        frame.remove();
+        if (fallback) fallback.hidden = false;
+      });
+  })();
+</script>
