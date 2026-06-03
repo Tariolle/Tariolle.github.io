@@ -234,6 +234,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      vertical-align: middle;
       overflow: hidden;
       appearance: none;
       cursor: pointer;
@@ -242,6 +243,7 @@
       border: 0;
       border-radius: 0.5rem;
       line-height: 1;
+      transform: translateY(-1px);
       transition: color 0.3s ease;
 
       &:hover {
