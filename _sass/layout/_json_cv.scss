@@ -10,6 +10,15 @@
   background: var(--global-bg-color);
 }
 
+.cv-actions {
+  margin-bottom: 1rem;
+}
+
+.cv-actions .btn {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .cv-pdf-frame {
   display: block;
   width: 100%;

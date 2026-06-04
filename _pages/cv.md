@@ -3,18 +3,27 @@ layout: archive
 title: "CV"
 permalink: /cv/
 author_profile: true
-hide_title: true
 redirect_from:
   - /resume
 ---
 
 {% assign cv_pdf_url = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/master/main.pdf" %}
 
+<p class="cv-actions">
+  <a class="btn" href="{{ cv_pdf_url }}" target="_blank" rel="noopener">Open PDF</a>
+  <a class="btn" href="{{ cv_pdf_url }}" download="Florent_Tariolle_CV.pdf">Download CV</a>
+</p>
+
 <div class="cv-pdf-viewer">
   <iframe id="cv-pdf-frame" class="cv-pdf-frame" title="Florent Tariolle CV"></iframe>
   <p class="cv-pdf-fallback" hidden>
     The embedded CV could not be loaded. <a href="{{ cv_pdf_url }}">Open the PDF directly</a>.
   </p>
+  <noscript>
+    <p class="cv-pdf-fallback">
+      JavaScript is required to embed the CV. <a href="{{ cv_pdf_url }}">Open the PDF directly</a>.
+    </p>
+  </noscript>
 </div>
 
 <script>

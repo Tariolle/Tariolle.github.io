@@ -15,10 +15,15 @@ Recent projects include [Opportunistic Target Selection](https://arxiv.org/abs/2
 
 I am seeking a six-month final-year research internship in deep learning starting in 2027.
 
-Research interests
-======
+## News
 
-- Deep Learning
-- Representation Learning
-- World Models and Deep Reinforcement Learning
-- Adversarial Machine Learning
+- May 2026: Opportunistic Target Selection accepted at CAp 2026.
+- 2026: Research internships at InterDigital and Enedis, applying deep learning to video compression and electricity-grid time-series simulation.
+- 2027: Seeking a six-month final-year research internship in deep learning.
+
+## Research themes
+
+- Representation learning for robust and controllable latent spaces.
+- Discrete world models and reinforcement learning agents that can plan in learned environments.
+- Query-efficient adversarial machine learning and evaluation.
+- Deep learning for video compression and high-frequency time-series simulation.
