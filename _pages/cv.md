@@ -8,20 +8,21 @@ redirect_from:
 ---
 
 {% assign cv_pdf_url = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/master/main.pdf" %}
+{% assign cv_pdf_preview_url = "https://github.com/Tariolle/curriculum-vitae/blob/master/main.pdf" %}
 
 <p class="cv-actions">
-  <a class="btn" href="{{ cv_pdf_url }}" target="_blank" rel="noopener">Open PDF</a>
-  <a class="btn" href="{{ cv_pdf_url }}" download="Florent_Tariolle_CV.pdf">Download CV</a>
+  <a id="cv-open-pdf" class="btn" href="{{ cv_pdf_preview_url }}" target="_blank" rel="noopener">Open PDF</a>
+  <a id="cv-download-pdf" class="btn" href="{{ cv_pdf_url }}" download="Florent_Tariolle_CV.pdf">Download CV</a>
 </p>
 
 <div class="cv-pdf-viewer">
   <iframe id="cv-pdf-frame" class="cv-pdf-frame" title="Florent Tariolle CV"></iframe>
   <p class="cv-pdf-fallback" hidden>
-    The embedded CV could not be loaded. <a href="{{ cv_pdf_url }}">Open the PDF directly</a>.
+    The embedded CV could not be loaded. <a href="{{ cv_pdf_preview_url }}">Open the PDF on GitHub</a>.
   </p>
   <noscript>
     <p class="cv-pdf-fallback">
-      JavaScript is required to embed the CV. <a href="{{ cv_pdf_url }}">Open the PDF directly</a>.
+      JavaScript is required to embed the CV. <a href="{{ cv_pdf_preview_url }}">Open the PDF on GitHub</a>.
     </p>
   </noscript>
 </div>
@@ -31,6 +32,8 @@ redirect_from:
     const cvPdfUrl = "{{ cv_pdf_url }}";
     const frame = document.getElementById("cv-pdf-frame");
     const fallback = document.querySelector(".cv-pdf-fallback");
+    const openPdfLink = document.getElementById("cv-open-pdf");
+    const downloadPdfLink = document.getElementById("cv-download-pdf");
 
     if (!frame || !window.fetch || !window.URL || !window.URL.createObjectURL) {
       if (fallback) fallback.hidden = false;
@@ -51,6 +54,8 @@ redirect_from:
         const objectUrl = URL.createObjectURL(pdfBlob);
 
         frame.src = objectUrl;
+        if (openPdfLink) openPdfLink.href = objectUrl;
+        if (downloadPdfLink) downloadPdfLink.href = objectUrl;
         window.addEventListener("pagehide", () => URL.revokeObjectURL(objectUrl), { once: true });
       })
       .catch(() => {
