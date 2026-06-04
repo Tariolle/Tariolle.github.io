@@ -1,0 +1,5 @@
+{% assign item = include.item %}
+{% assign publication_label = item.publication_status | default: "Published in" %}
+{% assign publication_year = item.date | default: "1900-01-01" | date: "%Y" %}
+
+<p>{{ publication_label }} <i>{{ item.venue }}</i>{% unless item.venue contains publication_year %}, {{ publication_year }}{% endunless %}{% if item.presentation %}, {{ item.presentation }}{% endif %}</p>
