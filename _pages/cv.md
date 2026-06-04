@@ -52,11 +52,43 @@ redirect_from:
           ? blob
           : new Blob([blob], { type: "application/pdf" });
         const objectUrl = URL.createObjectURL(pdfBlob);
+        const viewerHtml = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CV - Florent Tariolle</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: #525659;
+      }
+
+      iframe {
+        border: 0;
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe src="${objectUrl}" title="CV - Florent Tariolle"></iframe>
+  </body>
+</html>`;
+        const viewerUrl = URL.createObjectURL(new Blob([viewerHtml], { type: "text/html" }));
 
         frame.src = objectUrl;
-        if (openPdfLink) openPdfLink.href = objectUrl;
+        if (openPdfLink) openPdfLink.href = viewerUrl;
         if (downloadPdfLink) downloadPdfLink.href = objectUrl;
-        window.addEventListener("pagehide", () => URL.revokeObjectURL(objectUrl), { once: true });
+        window.addEventListener("pagehide", () => {
+          URL.revokeObjectURL(objectUrl);
+          URL.revokeObjectURL(viewerUrl);
+        }, { once: true });
       })
       .catch(() => {
         frame.remove();
