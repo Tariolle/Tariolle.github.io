@@ -1,0 +1,17 @@
+{% assign item = include.item %}
+{% if item.paperurl or item.codeurl or item.slidesurl %}
+  <p{% if include.compact %} style="font-size: smaller"{% endif %}>
+    {% assign has_previous_link = false %}
+    {% if item.paperurl %}
+      <a href="{{ item.paperurl }}">Paper</a>
+      {% assign has_previous_link = true %}
+    {% endif %}
+    {% if item.codeurl %}
+      {% if has_previous_link %} | {% endif %}<a href="{{ item.codeurl }}">Code</a>
+      {% assign has_previous_link = true %}
+    {% endif %}
+    {% if item.slidesurl %}
+      {% if has_previous_link %} | {% endif %}<a href="{{ item.slidesurl }}">Slides</a>
+    {% endif %}
+  </p>
+{% endif %}
