@@ -13,7 +13,7 @@ Independent research project on topology-aware training objectives for discrete 
 
 ## Opportunistic Target Selection
 
-[Paper](https://arxiv.org/abs/2605.25663) / [Code](https://github.com/Tariolle/opportunistic-target-selection)
+[Paper](https://arxiv.org/abs/2605.25663) / [Code](https://github.com/Tariolle/opportunistic-target-selection) / [Poster](https://github.com/Tariolle/opportunistic-target-selection/blob/main/poster/poster_beamer.pdf)
 
 Official implementation for the CAp 2026 paper on early directional commitment for query-efficient score-based black-box adversarial attacks. The repository includes attack implementations, benchmark scripts, analysis code, and reproducibility assets for ImageNet experiments across standard classifiers.
 
