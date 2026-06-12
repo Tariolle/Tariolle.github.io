@@ -10,6 +10,7 @@ publication_status: "Accepted at"
 presentation: "poster presentation"
 paperurl: "https://arxiv.org/pdf/2605.25663"
 codeurl: "https://github.com/Tariolle/opportunistic-target-selection"
+posterurl: "https://github.com/Tariolle/opportunistic-target-selection/blob/main/poster/poster_beamer.pdf"
 citation: "F. Tariolle and F. Yger. &quot;Opportunistic Target Selection: Early Directional Commitment for Query-Efficient Black-Box Adversarial Attacks.&quot; Accepted at CAp 2026."
 ---
 
