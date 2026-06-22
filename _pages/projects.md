@@ -11,11 +11,11 @@ author_profile: true
 
 Finalist project from Hack the World(s), a 24-hour hackathon on JEPAs and world models sponsored by Yann LeCun. Our team applied self-supervised representation learning to EEG, comparing ambient with SPD-tangent anti-collapse regularization under a patient-disjoint frozen-transfer protocol. The controlled result did not show a reliable accuracy gain from the geometric variants, but it established a careful research direction around geometry-aware EEG representations and anomaly detection.
 
-## SLS-WM: Structured Label Smoothing for Discrete World Models
+## SLS-WM: Annealed Structured Label Smoothing for Discrete World Models
 
 [Project page](https://tariolle.github.io/sls-wm/) / [Code](https://github.com/Tariolle/sls-wm)
 
-Independent research project on topology-aware training objectives for discrete latent predictors. The project integrates an FSQ tokenizer, an action-conditioned block-causal transformer, and an imagination-trained CNN controller in a Vision-Model-Controller pipeline for Geometry Dash, with real-time deployment at 30 FPS on a consumer GPU.
+Independent research project on annealed structured label smoothing for discrete world models. It designs a tokenizer-metric-aware objective that uses local soft targets early in training and anneals back to cross-entropy to preserve the final objective, and evaluates it on an accepted IRIS Atari world-model baseline under matched CE vs. annealed-SLS settings. The project also includes an action-conditioned Geometry Dash world model with FSQ tokenization, a block-causal dynamics transformer, and a latent actor-critic trained in imagined rollouts, enabling zero-shot deployment on real gameplay at 30 FPS.
 
 ## Opportunistic Target Selection
 
