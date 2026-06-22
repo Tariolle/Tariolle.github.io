@@ -9,7 +9,7 @@ author_profile: true
 
 [Code](https://github.com/Tariolle/hello-worlds) / [Deck](https://github.com/Tariolle/hello-worlds/blob/main/presentation/main.pdf)
 
-Team-finalist project from Hack the World(s), a 24-hour hackathon on JEPAs and world models sponsored by Yann LeCun. Our team applied self-supervised representation learning to EEG, comparing ambient with SPD-tangent anti-collapse regularization under a patient-disjoint frozen-transfer protocol. The controlled result did not show a reliable accuracy gain from the geometric variants, but it established a careful research direction around geometry-aware EEG representations and anomaly detection.
+Finalist project from Hack the World(s), a 24-hour hackathon on JEPAs and world models sponsored by Yann LeCun. Our team applied self-supervised representation learning to EEG, comparing ambient with SPD-tangent anti-collapse regularization under a patient-disjoint frozen-transfer protocol. The controlled result did not show a reliable accuracy gain from the geometric variants, but it established a careful research direction around geometry-aware EEG representations and anomaly detection.
 
 ## SLS-WM: Structured Label Smoothing for Discrete World Models
 
