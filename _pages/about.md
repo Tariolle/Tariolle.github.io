@@ -22,4 +22,4 @@ Research interests
 - Representation Learning
 - Self-Supervised Learning
 - World Models
-- Deep Reinforcement Learning
+- Model-Based Reinforcement Learning and Planning
