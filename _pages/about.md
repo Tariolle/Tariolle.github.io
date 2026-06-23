@@ -11,7 +11,7 @@ I am an engineering student in Computer Science and AI at [INSA Rouen Normandy](
 
 My current internships apply deep learning to different domains: at [InterDigital](https://www.interdigital.com/video-lab/video-codec-research), I work on methods for next-generation video compression, with emphasis on VVC (H.266) in-loop filtering and decoder-side filter selection; at [Enedis](https://www.enedis.fr/), I work on generative modeling and large-scale pipelines for high-frequency electricity-grid time-series simulation.
 
-Recent projects include [Hack the World(s)](https://github.com/Tariolle/hello-worlds), a finalist 24-hour project on geometry-aware self-supervised EEG representation learning, [Opportunistic Target Selection](https://arxiv.org/abs/2605.25663), a lightweight wrapper for query-efficient score-based black-box adversarial attacks accepted at CAp 2026, and [SLS-WM](https://tariolle.github.io/sls-wm/), an independent research project on annealed structured label smoothing for discrete world models.
+Recent projects include [HelloWorlds](https://github.com/Tariolle/hello-worlds), our finalist team project at Hack the World(s), a 24-hour Yann LeCun-sponsored hackathon on JEPAs and world models, where we built a geometry-aware self-supervised EEG representation-learning pipeline; [Opportunistic Target Selection](https://arxiv.org/abs/2605.25663), a lightweight wrapper for query-efficient score-based black-box adversarial attacks accepted at CAp 2026; and [SLS-WM](https://tariolle.github.io/sls-wm/), an independent research project on annealed structured label smoothing for discrete world models.
 
 I am seeking a six-month final-year research internship in deep learning starting in 2027.
 
