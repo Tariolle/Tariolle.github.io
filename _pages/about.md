@@ -23,4 +23,3 @@ Research interests
 - Self-Supervised Learning
 - World Models
 - Deep Reinforcement Learning
-- Adversarial Machine Learning
