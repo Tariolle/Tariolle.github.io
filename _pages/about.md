@@ -20,5 +20,7 @@ Research interests
 
 - Deep Learning
 - Representation Learning
-- World Models and Deep Reinforcement Learning
+- Self-Supervised Learning
+- World Models
+- Deep Reinforcement Learning
 - Adversarial Machine Learning
