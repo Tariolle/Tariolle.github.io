@@ -209,6 +209,10 @@
   }
 }
 
+.page__inner-wrap > .page__meta:empty {
+  display: none;
+}
+
 .page__meta-title {
   margin-bottom: 10px;
   font-size: $type-size-6;
