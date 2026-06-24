@@ -5,7 +5,7 @@ permalink: /projects/
 author_profile: true
 ---
 
-## Geometry-Aware JEPA for EEG
+## Geometry-Aware Joint-Embedding EEG
 
 [Code](https://github.com/Tariolle/hello-worlds) / [Deck](https://github.com/Tariolle/hello-worlds/blob/main/presentation/main.pdf)
 
