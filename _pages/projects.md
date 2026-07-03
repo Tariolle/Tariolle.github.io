@@ -11,11 +11,11 @@ author_profile: true
 
 Finalist at Hack the World(s), a 24-hour hackathon on JEPAs and world models sponsored by Yann LeCun. Built a compact self-supervised EEG pipeline with SIGReg frozen-transfer baselines and Riemannian latent analysis. The geometry-aware variants did not improve frozen-probe accuracy, but manifold-aware visualizations exposed useful latent structure and opened follow-up directions for EEG representation learning.
 
-## DashVMC: Real-Time Discrete World-Model Control in Geometry Dash
+## DashVMC: Real-Time Discrete World Model Control in Geometry Dash
 
 [Project page](https://tariolle.github.io/dash-vmc/) / [Code](https://github.com/Tariolle/dash-vmc)
 
-Independent research project on real-time discrete world-model control in Geometry Dash. The system combines an FSQ tokenizer, an action-conditioned transformer world model, and a lightweight actor-critic trained from behavioural cloning plus PPO in latent FSQ-token rollouts, enabling live 30 FPS deployment. Decoded pixel rollouts are used for qualitative demos, including plausible level-continuation samples from real gameplay prefixes.
+Independent research project on real-time discrete world model control in Geometry Dash. The system combines an FSQ tokenizer, an action-conditioned transformer world model, and a lightweight actor-critic trained from behavioural cloning plus PPO in latent FSQ-token rollouts, enabling live 30 FPS deployment. Decoded pixel rollouts are used for qualitative demos, including plausible level-continuation samples from real gameplay prefixes.
 
 ## Rose
 
