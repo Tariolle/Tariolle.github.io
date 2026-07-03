@@ -15,7 +15,7 @@ Finalist at Hack the World(s), a 24-hour hackathon on JEPAs and world models spo
 
 [Project page](https://tariolle.github.io/dash-vmc/) / [Code](https://github.com/Tariolle/dash-vmc)
 
-Independent research project on real-time discrete world-model control in Geometry Dash. The system combines an FSQ tokenizer, an action-conditioned transformer world model, and a lightweight actor-critic trained from behavioural cloning plus PPO in imagined rollouts, enabling live 30 FPS deployment and visual level-continuation samples from real gameplay prefixes. Structured Label Smoothing remains a scoped FSQ-neighbour design choice; matched IRIS/Pong runs are reported as a negative/conditional generalization diagnostic rather than as the main claim.
+Independent research project on real-time discrete world-model control in Geometry Dash. The system combines an FSQ tokenizer, an action-conditioned transformer world model, and a lightweight actor-critic trained from behavioural cloning plus PPO in latent FSQ-token rollouts, enabling live 30 FPS deployment. Decoded pixel rollouts are used for qualitative demos, including plausible level-continuation samples from real gameplay prefixes.
 
 ## Rose
 
