@@ -38,7 +38,6 @@ author:
   googlescholar    : "https://scholar.google.com/citations?user=z5QWV8kAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
-  orcid            : "https://orcid.org/0009-0007-4877-3845"
   semantic         : # URL
   ssrn             : # URL
   pubmed           : # URL
@@ -154,7 +153,6 @@ social:
     - "https://github.com/Tariolle"
     - "https://www.linkedin.com/in/florent-tariolle/"
     - "https://scholar.google.com/citations?user=z5QWV8kAAAAJ"
-    - "https://orcid.org/0009-0007-4877-3845"
 
 
 # Analytics
