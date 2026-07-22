@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "AI Research Student"
   location         : "France"
-  employer         : "INSA Rouen Normandy / InterDigital"
+  employer         : # blank
   uri              : # URL
   email            : "florent.tariolle@insa-rouen.fr" 
 
