@@ -20,15 +20,13 @@ window.addEventListener("scroll", updateHeader, { passive: true });
 updateHeader();
 
 const startAnimations = () => {
-  const heroKicker = document.querySelector<HTMLElement>("[data-hero-kicker]");
   const heroTitle = document.querySelector<HTMLElement>("[data-hero-title]");
   const heroDetails = document.querySelectorAll<HTMLElement>("[data-hero-detail]");
   const latentField = document.querySelector<HTMLElement>("[data-latent-field]");
 
-  if (heroKicker && heroTitle && heroDetails.length && latentField) {
+  if (heroTitle && heroDetails.length && latentField) {
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
     heroTimeline
-      .from(heroKicker, { opacity: 0, y: 16, duration: 0.55 }, 0.15)
       .from(heroTitle, { yPercent: 108, duration: 1.15 }, 0.08)
       .from(heroDetails, { opacity: 0, y: 24, duration: 0.75, stagger: 0.09 }, 0.48)
       .from(latentField, { opacity: 0, scale: 0.96, duration: 1.2 }, 0.25);

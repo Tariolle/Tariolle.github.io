@@ -517,11 +517,6 @@ h3 {
   pointer-events: none;
 }
 
-.hero-kicker {
-  margin-bottom: clamp(1.25rem, 3vh, 2.5rem);
-  color: var(--paper);
-}
-
 .hero-title-mask {
   overflow: hidden;
   width: 100%;
@@ -755,18 +750,6 @@ h3 {
   filter: grayscale(0.25) contrast(1.04);
 }
 
-.portrait-caption {
-  display: flex;
-  margin-top: 0.8rem;
-  flex-direction: column;
-  gap: 0.2rem;
-  color: var(--paper-faint);
-  font-family: var(--font-mono);
-  font-size: 0.61rem;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
 .about-copy h2,
 .publication-feature h2 {
   max-width: 14ch;
@@ -914,6 +897,10 @@ h3 {
   margin: 1.25rem 0 0;
   color: var(--paper-muted);
   font-size: clamp(1rem, 1.4vw, 1.2rem);
+}
+
+.not-found-content .text-link {
+  margin-top: 1.25rem;
 }
 
 .project-item {
