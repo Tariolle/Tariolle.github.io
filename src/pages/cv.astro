@@ -1,8 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const cvPdf = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/master/main.pdf";
-const cvPreview = "https://github.com/Tariolle/curriculum-vitae/blob/master/main.pdf";
+const cvPdf = "/documents/florent-tariolle-cv.pdf";
 ---
 
 <BaseLayout
@@ -10,12 +9,12 @@ const cvPreview = "https://github.com/Tariolle/curriculum-vitae/blob/master/main
   title="CV — Florent Tariolle"
   description="Curriculum vitae of Florent Tariolle, an AI engineering student working on deep learning research."
 >
-  <section class="page-section page-section--standalone" aria-labelledby="cv-title">
+  <section class="page-section page-section--cv" aria-labelledby="cv-title">
     <h1 class="sr-only" id="cv-title">Curriculum vitae</h1>
     <div class="cv-toolbar" data-reveal>
       <p class="eyebrow">Current document</p>
       <div class="cv-actions">
-        <a class="text-link" href={cvPreview} target="_blank" rel="noreferrer">Open PDF ↗</a>
+        <a class="text-link" href={cvPdf} target="_blank" rel="noreferrer">Open PDF ↗</a>
         <a class="text-link" href={cvPdf} download="Florent_Tariolle_CV.pdf">Download PDF ↓</a>
       </div>
     </div>
