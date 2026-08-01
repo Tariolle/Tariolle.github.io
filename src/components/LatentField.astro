@@ -41,8 +41,16 @@
     const nodeInfluence = new Float32Array(nodeCount);
     const nodePhase = new Float32Array(nodeCount);
     const nodeSpeed = new Float32Array(nodeCount);
+    const pairCount = nodeCount / 2;
+    const pairX = new Float32Array(pairCount);
+    const pairY = new Float32Array(pairCount);
+    const pairZ = new Float32Array(pairCount);
+    const maximumGraphScale = 1.06;
+    const verticalSafeArea = 0.76;
+    const verticalDriftAllowance = 0.12;
+    const halfVerticalFov = THREE.MathUtils.degToRad(camera.fov * 0.5);
 
-    let seed = 1087;
+    let seed = crypto.getRandomValues(new Uint32Array(1))[0]!;
     const random = () => {
       seed |= 0;
       seed = seed + 0x6d2b79f5 | 0;
@@ -51,44 +59,113 @@
       return ((value ^ value >>> 14) >>> 0) / 4294967296;
     };
 
-    for (let index = 0; index < nodeCount; index += 1) {
-      const offset = index * 3;
-      const x = (random() - 0.5) * 12.5;
-      const y = (random() - 0.5) * 6.7;
+    for (let pairIndex = 0; pairIndex < pairCount; pairIndex += 1) {
+      const leftIndex = pairIndex * 2;
+      const rightIndex = leftIndex + 1;
+      const leftOffset = leftIndex * 3;
+      const rightOffset = rightIndex * 3;
+      const x = 0.18 + random() * 6.07;
       const z = (random() - 0.5) * 3.8;
+      const visibleHalfHeight = Math.tan(halfVerticalFov) * (camera.position.z - z);
+      const maximumY = visibleHalfHeight * verticalSafeArea / maximumGraphScale - verticalDriftAllowance;
+      const y = (random() - 0.5) * maximumY * 2;
+      const phase = random() * Math.PI * 2;
+      const speed = 0.12 + random() * 0.18;
 
-      nodePositions[offset] = x;
-      nodePositions[offset + 1] = y;
-      nodePositions[offset + 2] = z;
-      nodeRestPositions[offset] = x;
-      nodeRestPositions[offset + 1] = y;
-      nodeRestPositions[offset + 2] = z;
-      nodePhase[index] = random() * Math.PI * 2;
-      nodeSpeed[index] = 0.12 + random() * 0.18;
+      nodePositions[leftOffset] = -x;
+      nodePositions[leftOffset + 1] = y;
+      nodePositions[leftOffset + 2] = z;
+      nodePositions[rightOffset] = x;
+      nodePositions[rightOffset + 1] = y;
+      nodePositions[rightOffset + 2] = z;
+      nodeRestPositions[leftOffset] = -x;
+      nodeRestPositions[leftOffset + 1] = y;
+      nodeRestPositions[leftOffset + 2] = z;
+      nodeRestPositions[rightOffset] = x;
+      nodeRestPositions[rightOffset + 1] = y;
+      nodeRestPositions[rightOffset + 2] = z;
+      nodePhase[leftIndex] = phase;
+      nodePhase[rightIndex] = phase;
+      nodeSpeed[leftIndex] = speed;
+      nodeSpeed[rightIndex] = speed;
+      pairX[pairIndex] = x;
+      pairY[pairIndex] = y;
+      pairZ[pairIndex] = z;
     }
 
     const edges: Edge[] = [];
     const degree = new Uint8Array(nodeCount);
+    const edgeKeys = new Set<string>();
     const maxDistance = compact ? 2.25 : 2.05;
 
-    for (let a = 0; a < nodeCount; a += 1) {
-      for (let b = a + 1; b < nodeCount; b += 1) {
-        if (degree[a]! >= 5 || degree[b]! >= 5) continue;
+    const addEdge = (a: number, b: number) => {
+      if (a === b) return;
+      const low = Math.min(a, b);
+      const high = Math.max(a, b);
+      const key = `${low}:${high}`;
+      if (edgeKeys.has(key)) return;
+      edgeKeys.add(key);
+      edges.push({ a: low, b: high });
+      degree[low] = (degree[low] ?? 0) + 1;
+      degree[high] = (degree[high] ?? 0) + 1;
+    };
 
-        const ax = nodeRestPositions[a * 3]!;
-        const ay = nodeRestPositions[a * 3 + 1]!;
-        const az = nodeRestPositions[a * 3 + 2]!;
-        const bx = nodeRestPositions[b * 3]!;
-        const by = nodeRestPositions[b * 3 + 1]!;
-        const bz = nodeRestPositions[b * 3 + 2]!;
-        const distance = Math.hypot(ax - bx, ay - by, az - bz);
+    const addMirroredPairEdge = (a: number, b: number) => {
+      addEdge(a * 2, b * 2);
+      addEdge(a * 2 + 1, b * 2 + 1);
+    };
 
-        if (distance < maxDistance) {
-          edges.push({ a, b });
-          degree[a]! += 1;
-          degree[b]! += 1;
+    const pairDistance = (a: number, b: number) => Math.hypot(
+      pairX[a]! - pairX[b]!,
+      pairY[a]! - pairY[b]!,
+      pairZ[a]! - pairZ[b]!,
+    );
+
+    // A mirrored minimum spanning tree guarantees every point belongs to the graph.
+    const connectedPairs = new Set<number>([0]);
+    while (connectedPairs.size < pairCount) {
+      let closestConnected = -1;
+      let closestUnconnected = -1;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      connectedPairs.forEach((connected) => {
+        for (let candidate = 0; candidate < pairCount; candidate += 1) {
+          if (connectedPairs.has(candidate)) continue;
+          const distance = pairDistance(connected, candidate);
+          if (distance < closestDistance) {
+            closestConnected = connected;
+            closestUnconnected = candidate;
+            closestDistance = distance;
+          }
         }
+      });
+
+      if (closestConnected < 0 || closestUnconnected < 0) break;
+      addMirroredPairEdge(closestConnected, closestUnconnected);
+      connectedPairs.add(closestUnconnected);
+    }
+
+    // Add local mirrored connections for a denser neural-network silhouette.
+    for (let a = 0; a < pairCount; a += 1) {
+      for (let b = a + 1; b < pairCount; b += 1) {
+        const leftA = a * 2;
+        const leftB = b * 2;
+        const rightA = leftA + 1;
+        const rightB = leftB + 1;
+        if (degree[leftA]! >= 5 || degree[leftB]! >= 5 || degree[rightA]! >= 5 || degree[rightB]! >= 5) continue;
+        if (pairDistance(a, b) < maxDistance) addMirroredPairEdge(a, b);
       }
+    }
+
+    // Join both mirrored halves near the center while preserving bilateral symmetry.
+    const centralPairs = Array.from({ length: pairCount }, (_, index) => index)
+      .sort((a, b) => pairX[a]! - pairX[b]!)
+      .slice(0, 3);
+    centralPairs.forEach((pairIndex) => addEdge(pairIndex * 2, pairIndex * 2 + 1));
+    if (centralPairs.length >= 2) {
+      const [first, second] = centralPairs;
+      addEdge(first! * 2, second! * 2 + 1);
+      addEdge(first! * 2 + 1, second! * 2);
     }
 
     const pointGeometry = new THREE.BufferGeometry();
@@ -210,7 +287,8 @@
         const phase = nodePhase[index]!;
         const speed = nodeSpeed[index]!;
 
-        let targetX = restX + Math.sin(elapsed * speed + phase) * 0.14;
+        const horizontalDrift = Math.sin(elapsed * speed + phase) * 0.14;
+        let targetX = restX + (index % 2 === 0 ? -horizontalDrift : horizontalDrift);
         let targetY = restY + Math.cos(elapsed * speed * 0.8 + phase) * 0.12;
         let targetZ = restZ + Math.sin(elapsed * speed * 0.6 + phase * 1.7) * 0.18;
 
