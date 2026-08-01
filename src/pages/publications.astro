@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  page="publications"
+  title="Publications — Florent Tariolle"
+  description="Publications by Florent Tariolle in adversarial machine learning and efficient learning systems."
+>
+  <section class="page-section page-section--standalone publication-list" aria-labelledby="publications-title">
+    <h1 class="sr-only" id="publications-title">Publications</h1>
+    <article class="publication-entry" data-reveal>
+      <aside class="publication-entry-aside">
+        <span>2026</span><br />
+        <span>CAp</span><br />
+        <span>Poster</span>
+      </aside>
+      <div class="publication-entry-content">
+        <h2>Opportunistic Target Selection: Early Directional Commitment for Query-Efficient Black-Box Adversarial Attacks</h2>
+        <p>
+          Black-box attacks that minimize only ground-truth confidence can make diffuse progress without committing to a specific adversarial class. Opportunistic Target Selection first lets an attack explore in untargeted mode, then switches to a targeted objective against the leading non-true class.
+        </p>
+        <p>
+          Across three score-based attacks and five ImageNet classifiers, OTS improves drift-prone random-search attacks by up to 27 percentage points in success rate and reduces censored-mean iterations by 43% on ResNet-50.
+        </p>
+        <p class="publication-citation">F. Tariolle and F. Yger. Accepted at CAp 2026 (Conférence sur l’Apprentissage automatique).</p>
+        <div class="publication-links">
+          <a href="https://arxiv.org/abs/2605.25663" target="_blank" rel="noreferrer">arXiv ↗</a>
+          <a href="https://github.com/Tariolle/opportunistic-target-selection" target="_blank" rel="noreferrer">Code ↗</a>
+          <a href="https://github.com/Tariolle/opportunistic-target-selection/blob/main/poster/poster_beamer.pdf" target="_blank" rel="noreferrer">Poster ↗</a>
+          <a href="https://scholar.google.com/citations?user=z5QWV8kAAAAJ" target="_blank" rel="noreferrer">Google Scholar ↗</a>
+        </div>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

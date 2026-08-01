@@ -1,0 +1,293 @@
+<div class="latent-field" data-latent-field aria-hidden="true">
+  <canvas></canvas>
+</div>
+
+<script>
+  import * as THREE from "three";
+
+  type Edge = {
+    a: number;
+    b: number;
+  };
+
+  const roots = document.querySelectorAll<HTMLElement>("[data-latent-field]");
+
+  roots.forEach((root) => {
+    const canvas = root.querySelector<HTMLCanvasElement>("canvas");
+    if (!canvas) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance",
+    });
+
+    renderer.setClearColor(0x000000, 0);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+    camera.position.set(0, 0, 12);
+
+    const graph = new THREE.Group();
+    scene.add(graph);
+
+    const compact = window.innerWidth < 720;
+    const nodeCount = compact ? 58 : 96;
+    const nodePositions = new Float32Array(nodeCount * 3);
+    const nodeRestPositions = new Float32Array(nodeCount * 3);
+    const nodeInfluence = new Float32Array(nodeCount);
+    const nodePhase = new Float32Array(nodeCount);
+    const nodeSpeed = new Float32Array(nodeCount);
+
+    let seed = 1087;
+    const random = () => {
+      seed |= 0;
+      seed = seed + 0x6d2b79f5 | 0;
+      let value = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      value = value + Math.imul(value ^ value >>> 7, 61 | value) ^ value;
+      return ((value ^ value >>> 14) >>> 0) / 4294967296;
+    };
+
+    for (let index = 0; index < nodeCount; index += 1) {
+      const offset = index * 3;
+      const x = (random() - 0.5) * 12.5;
+      const y = (random() - 0.5) * 6.7;
+      const z = (random() - 0.5) * 3.8;
+
+      nodePositions[offset] = x;
+      nodePositions[offset + 1] = y;
+      nodePositions[offset + 2] = z;
+      nodeRestPositions[offset] = x;
+      nodeRestPositions[offset + 1] = y;
+      nodeRestPositions[offset + 2] = z;
+      nodePhase[index] = random() * Math.PI * 2;
+      nodeSpeed[index] = 0.12 + random() * 0.18;
+    }
+
+    const edges: Edge[] = [];
+    const degree = new Uint8Array(nodeCount);
+    const maxDistance = compact ? 2.25 : 2.05;
+
+    for (let a = 0; a < nodeCount; a += 1) {
+      for (let b = a + 1; b < nodeCount; b += 1) {
+        if (degree[a]! >= 5 || degree[b]! >= 5) continue;
+
+        const ax = nodeRestPositions[a * 3]!;
+        const ay = nodeRestPositions[a * 3 + 1]!;
+        const az = nodeRestPositions[a * 3 + 2]!;
+        const bx = nodeRestPositions[b * 3]!;
+        const by = nodeRestPositions[b * 3 + 1]!;
+        const bz = nodeRestPositions[b * 3 + 2]!;
+        const distance = Math.hypot(ax - bx, ay - by, az - bz);
+
+        if (distance < maxDistance) {
+          edges.push({ a, b });
+          degree[a]! += 1;
+          degree[b]! += 1;
+        }
+      }
+    }
+
+    const pointGeometry = new THREE.BufferGeometry();
+    pointGeometry.setAttribute("position", new THREE.BufferAttribute(nodePositions, 3));
+    pointGeometry.setAttribute("aInfluence", new THREE.BufferAttribute(nodeInfluence, 1));
+
+    const pointMaterial = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      vertexShader: `
+        attribute float aInfluence;
+        varying float vInfluence;
+
+        void main() {
+          vInfluence = aInfluence;
+          vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_Position = projectionMatrix * modelViewPosition;
+          gl_PointSize = 2.8 + aInfluence * 5.2;
+        }
+      `,
+      fragmentShader: `
+        varying float vInfluence;
+
+        void main() {
+          float distanceFromCenter = distance(gl_PointCoord, vec2(0.5));
+          float alpha = 1.0 - smoothstep(0.34, 0.5, distanceFromCenter);
+          vec3 paper = vec3(0.945, 0.933, 0.906);
+          vec3 signal = vec3(1.0, 0.294, 0.169);
+          vec3 color = mix(paper, signal, vInfluence);
+          gl_FragColor = vec4(color, alpha * (0.72 + vInfluence * 0.28));
+        }
+      `,
+    });
+
+    const points = new THREE.Points(pointGeometry, pointMaterial);
+    graph.add(points);
+
+    const linePositions = new Float32Array(edges.length * 6);
+    const lineColors = new Float32Array(edges.length * 6);
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+    lineGeometry.setAttribute("color", new THREE.BufferAttribute(lineColors, 3));
+
+    const lineMaterial = new THREE.LineBasicMaterial({
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.48,
+      depthWrite: false,
+    });
+
+    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+    graph.add(lines);
+
+    const restingLine = new THREE.Color(0x403f3b);
+    const activeLine = new THREE.Color(0xff4b2b);
+    const mixedLine = new THREE.Color();
+
+    const pointer = {
+      x: 0,
+      y: 0,
+      targetX: 0,
+      targetY: 0,
+      active: false,
+    };
+
+    let visible = true;
+    let width = 1;
+    let height = 1;
+    const startedAt = performance.now();
+
+    const resize = () => {
+      const bounds = root.getBoundingClientRect();
+      width = Math.max(bounds.width, 1);
+      height = Math.max(bounds.height, 1);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      graph.scale.setScalar(width < 720 ? 0.72 : Math.min(1.06, width / 1300));
+    };
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(root);
+    resize();
+
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      visible = entry?.isIntersecting ?? false;
+    }, { rootMargin: "160px" });
+    visibilityObserver.observe(root);
+
+    const updatePointer = (event: PointerEvent) => {
+      const bounds = root.getBoundingClientRect();
+      pointer.targetX = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+      pointer.targetY = -(((event.clientY - bounds.top) / bounds.height) * 2 - 1);
+      pointer.active = true;
+    };
+
+    root.addEventListener("pointerenter", updatePointer);
+    root.addEventListener("pointermove", updatePointer);
+    root.addEventListener("pointerleave", () => {
+      pointer.active = false;
+      pointer.targetX = 0;
+      pointer.targetY = 0;
+    });
+
+    const updateGraph = (elapsed: number) => {
+      pointer.x = THREE.MathUtils.lerp(pointer.x, pointer.targetX, 0.075);
+      pointer.y = THREE.MathUtils.lerp(pointer.y, pointer.targetY, 0.075);
+
+      const pointerX = pointer.x * 6.2;
+      const pointerY = pointer.y * 3.2;
+      const radius = compact ? 2.15 : 2.4;
+
+      for (let index = 0; index < nodeCount; index += 1) {
+        const offset = index * 3;
+        const restX = nodeRestPositions[offset]!;
+        const restY = nodeRestPositions[offset + 1]!;
+        const restZ = nodeRestPositions[offset + 2]!;
+        const phase = nodePhase[index]!;
+        const speed = nodeSpeed[index]!;
+
+        let targetX = restX + Math.sin(elapsed * speed + phase) * 0.14;
+        let targetY = restY + Math.cos(elapsed * speed * 0.8 + phase) * 0.12;
+        let targetZ = restZ + Math.sin(elapsed * speed * 0.6 + phase * 1.7) * 0.18;
+
+        const dx = targetX - pointerX;
+        const dy = targetY - pointerY;
+        const distance = Math.max(Math.hypot(dx, dy), 0.001);
+        const influence = pointer.active ? Math.max(0, 1 - distance / radius) : 0;
+        const smoothInfluence = influence * influence * (3 - 2 * influence);
+
+        targetX += dx / distance * smoothInfluence * 0.72;
+        targetY += dy / distance * smoothInfluence * 0.72;
+        targetZ += smoothInfluence * 0.9;
+
+        nodePositions[offset] = THREE.MathUtils.lerp(nodePositions[offset]!, targetX, 0.055);
+        nodePositions[offset + 1] = THREE.MathUtils.lerp(nodePositions[offset + 1]!, targetY, 0.055);
+        nodePositions[offset + 2] = THREE.MathUtils.lerp(nodePositions[offset + 2]!, targetZ, 0.055);
+        nodeInfluence[index] = THREE.MathUtils.lerp(nodeInfluence[index]!, smoothInfluence, 0.12);
+      }
+
+      const pointPositionAttribute = pointGeometry.getAttribute("position") as THREE.BufferAttribute;
+      const influenceAttribute = pointGeometry.getAttribute("aInfluence") as THREE.BufferAttribute;
+      pointPositionAttribute.needsUpdate = true;
+      influenceAttribute.needsUpdate = true;
+
+      edges.forEach((edge, edgeIndex) => {
+        const lineOffset = edgeIndex * 6;
+        const aOffset = edge.a * 3;
+        const bOffset = edge.b * 3;
+
+        linePositions[lineOffset] = nodePositions[aOffset]!;
+        linePositions[lineOffset + 1] = nodePositions[aOffset + 1]!;
+        linePositions[lineOffset + 2] = nodePositions[aOffset + 2]!;
+        linePositions[lineOffset + 3] = nodePositions[bOffset]!;
+        linePositions[lineOffset + 4] = nodePositions[bOffset + 1]!;
+        linePositions[lineOffset + 5] = nodePositions[bOffset + 2]!;
+
+        const influence = Math.max(nodeInfluence[edge.a]!, nodeInfluence[edge.b]!);
+        mixedLine.copy(restingLine).lerp(activeLine, influence);
+        lineColors[lineOffset] = mixedLine.r;
+        lineColors[lineOffset + 1] = mixedLine.g;
+        lineColors[lineOffset + 2] = mixedLine.b;
+        lineColors[lineOffset + 3] = mixedLine.r;
+        lineColors[lineOffset + 4] = mixedLine.g;
+        lineColors[lineOffset + 5] = mixedLine.b;
+      });
+
+      const linePositionAttribute = lineGeometry.getAttribute("position") as THREE.BufferAttribute;
+      const lineColorAttribute = lineGeometry.getAttribute("color") as THREE.BufferAttribute;
+      linePositionAttribute.needsUpdate = true;
+      lineColorAttribute.needsUpdate = true;
+
+      graph.rotation.x = pointer.y * 0.028;
+      graph.rotation.y = pointer.x * 0.05;
+    };
+
+    const render = () => {
+      if (!visible) return;
+      const elapsed = (performance.now() - startedAt) / 1000;
+      updateGraph(reducedMotion ? 0 : elapsed);
+      renderer.render(scene, camera);
+    };
+
+    if (reducedMotion) {
+      render();
+    } else {
+      renderer.setAnimationLoop(render);
+    }
+
+    window.addEventListener("pagehide", () => {
+      renderer.setAnimationLoop(null);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
+      pointGeometry.dispose();
+      pointMaterial.dispose();
+      lineGeometry.dispose();
+      lineMaterial.dispose();
+      renderer.dispose();
+    }, { once: true });
+  });
+</script>

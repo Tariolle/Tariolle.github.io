@@ -1,0 +1,55 @@
+---
+interface Props {
+  activePage?: "home" | "projects" | "publications" | "cv" | undefined;
+}
+
+const { activePage } = Astro.props;
+
+const links = [
+  { label: "About", href: "/#about", page: "home" },
+  { label: "Work", href: "/projects/", page: "projects" },
+  { label: "Publications", href: "/publications/", page: "publications" },
+  { label: "CV", href: "/cv/", page: "cv" },
+] as const;
+---
+
+<header class="site-header" data-site-header>
+  <a class="wordmark" href="/" aria-label="Florent Tariolle, home">
+    <span class="wordmark-mark">FT</span>
+    <span class="wordmark-slash">/</span>
+    <span class="wordmark-name">Florent Tariolle</span>
+  </a>
+
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    {links.map((link) => (
+      <a
+        class:list={["nav-link", { active: activePage === link.page }]}
+        href={link.href}
+        aria-current={activePage === link.page ? "page" : undefined}
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+
+  <button class="menu-trigger" popovertarget="mobile-menu" aria-label="Open navigation">
+    <span>Menu</span>
+    <span class="menu-trigger-lines" aria-hidden="true"></span>
+  </button>
+
+  <div class="mobile-menu" id="mobile-menu" popover>
+    <div class="mobile-menu-top">
+      <span class="eyebrow">Navigation</span>
+      <button class="menu-close" popovertarget="mobile-menu" popovertargetaction="hide">Close</button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      {links.map((link, index) => (
+        <a href={link.href}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <p>Deep learning research<br />Rouen, France</p>
+  </div>
+</header>

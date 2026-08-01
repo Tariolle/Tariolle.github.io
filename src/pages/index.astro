@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LatentField from "../components/LatentField.astro";
+import profile from "../../images/profile.png";
+---
+
+<BaseLayout page="home">
+  <section class="hero" aria-labelledby="hero-title">
+    <LatentField />
+    <div class="hero-copy">
+      <p class="eyebrow hero-kicker" data-hero-kicker>Deep learning research</p>
+      <div class="hero-title-mask">
+        <h1 class="hero-title" id="hero-title" data-hero-title>Florent Tariolle</h1>
+      </div>
+      <p class="hero-statement" data-hero-detail>
+        I build deep neural networks that think, predict and act.
+      </p>
+      <p class="hero-topics" data-hero-detail>
+        World models · Self-supervised learning · Reinforcement learning
+      </p>
+      <nav class="hero-links" aria-label="Contact and profiles" data-hero-detail>
+        <a href="mailto:florent.tariolle@insa-rouen.fr">Email</a>
+        <a href="https://github.com/Tariolle" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://scholar.google.com/citations?user=z5QWV8kAAAAJ" target="_blank" rel="noreferrer">Scholar</a>
+        <a href="https://www.linkedin.com/in/florent-tariolle/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="home-section" id="about" aria-labelledby="about-title">
+    <div class="section-label">
+      <span class="section-label-text">About</span>
+    </div>
+    <div class="about-grid">
+      <figure class="about-portrait-wrap" data-reveal>
+        <img
+          class="about-portrait"
+          src={profile.src}
+          width={profile.width}
+          height={profile.height}
+          alt="Portrait of Florent Tariolle"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="portrait-caption">
+          <span>Florent Tariolle</span>
+          <span>Rouen, France</span>
+        </figcaption>
+      </figure>
+      <div class="about-copy" data-reveal>
+        <h2 id="about-title">Research that crosses representation and action.</h2>
+        <div class="about-copy-body">
+          <p>
+            I am an engineering student in Computer Science and Artificial Intelligence at{" "}
+            <a href="https://www.insa-rouen.fr/" target="_blank" rel="noreferrer">INSA Rouen Normandy</a>{" "}
+            and an incoming Master's student in Machine Learning for Artificial Intelligence at the{" "}
+            <a href="https://mastersd.univ-rouen.fr/mlai.php" target="_blank" rel="noreferrer">University of Rouen Normandy</a>.
+          </p>
+          <p>
+            At{" "}<a href="https://www.interdigital.com/video-lab/video-codec-research" target="_blank" rel="noreferrer">InterDigital</a>,
+            I work on deep learning for next-generation video compression. At{" "}
+            <a href="https://www.enedis.fr/" target="_blank" rel="noreferrer">Enedis</a>, I work on generative modeling and large-scale pipelines for high-frequency electricity-grid time series.
+          </p>
+        </div>
+        <p class="availability">Seeking a six-month research internship starting in 2027</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="publication-title">
+    <div class="section-label">
+      <span class="section-label-text">Recent research</span>
+    </div>
+    <div class="publication-feature">
+      <h2 id="publication-title" data-reveal>Early commitment, fewer queries.</h2>
+      <article class="publication-card" data-reveal>
+        <div class="publication-meta">
+          <span>Accepted at CAp 2026</span>
+          <span>Adversarial ML</span>
+        </div>
+        <h3>Opportunistic Target Selection: Early Directional Commitment for Query-Efficient Black-Box Adversarial Attacks</h3>
+        <p>
+          A lightweight wrapper that switches score-based black-box attacks from untargeted exploration to early targeted commitment, reducing class drift in random-search attacks.
+        </p>
+        <div class="publication-links">
+          <a href="https://arxiv.org/abs/2605.25663" target="_blank" rel="noreferrer">Paper ↗</a>
+          <a href="https://github.com/Tariolle/opportunistic-target-selection" target="_blank" rel="noreferrer">Code ↗</a>
+          <a href="/publications/">Publication details →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
