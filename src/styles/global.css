@@ -812,6 +812,15 @@ h3 {
   gap: clamp(3rem, 8vw, 8rem);
 }
 
+.publication-feature--single {
+  display: block;
+}
+
+.publication-feature--single .publication-card {
+  width: min(100%, 64rem);
+  margin-left: auto;
+}
+
 .publication-card {
   padding-block: 1.75rem;
   border-top: 1px solid var(--line-strong);
