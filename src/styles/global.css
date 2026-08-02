@@ -955,14 +955,26 @@ h3 {
   font-size: 0.9rem;
 }
 
-.project-stat {
-  display: inline-block;
+.project-stats {
+  display: flex;
+  align-items: center;
+  width: fit-content;
   margin-top: 1rem;
+}
+
+.project-stat {
+  display: block;
   color: var(--signal);
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
+}
+
+.project-stat + .project-stat {
+  padding-left: 1rem;
+  margin-left: 1rem;
+  border-left: 1px solid var(--line-strong);
 }
 
 .publication-list {
@@ -1261,6 +1273,20 @@ h3 {
 
   .project-detail {
     grid-column: 1;
+  }
+
+  .project-stats {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .project-stat + .project-stat {
+    padding-top: 0.65rem;
+    padding-left: 0;
+    margin-left: 0;
+    border-top: 1px solid var(--line-strong);
+    border-left: 0;
   }
 
   .publication-entry-aside {

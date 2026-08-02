@@ -55,9 +55,12 @@ const projects = [
           </div>
           <div class="project-detail">
             <p>{project.description}</p>
-            {project.stat && <span class="project-stat">{project.stat}</span>}
-            {" "}
-            {project.repo && <span class="project-stat" data-github-repo={project.repo}>GitHub repository</span>}
+            {(project.stat || project.repo) && (
+              <div class="project-stats" aria-label={`${project.title} metrics`}>
+                {project.stat && <span class="project-stat">{project.stat}</span>}
+                {project.repo && <span class="project-stat" data-github-repo={project.repo}>GitHub repository</span>}
+              </div>
+            )}
             <div class="project-links">
               {project.links.map((link) => (
                 <a href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</a>
