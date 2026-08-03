@@ -69,20 +69,60 @@ if (!reducedMotion) {
   }
 }
 
+const githubStarCacheTtl = 10 * 60 * 1000;
+
 document.querySelectorAll<HTMLElement>("[data-github-repo]").forEach(async (label) => {
-  const repo = label.dataset.githubRepo;
-  if (!repo) return;
+  const repository = label.dataset.githubRepo;
+  const fallbackCount = Number(label.dataset.githubStars);
+  if (!repository || !Number.isInteger(fallbackCount)) return;
+
+  const cacheKey = `portfolio:github-stars:${repository}`;
+  let displayedCount = fallbackCount;
+  let checkedAt = 0;
+
+  const saveCache = (count: number) => {
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify({ count, checkedAt: Date.now() }));
+    } catch {
+      // Storage can be unavailable in restricted browsing modes.
+    }
+  };
 
   try {
-    const response = await fetch(`https://api.github.com/repos/${repo}`, {
-      headers: { Accept: "application/vnd.github+json" },
-    });
-    if (!response.ok) return;
-    const repository = await response.json();
-    if (Number.isFinite(repository.stargazers_count)) {
-      label.textContent = `${repository.stargazers_count.toLocaleString("en-US")} stars`;
+    const cachedValue = localStorage.getItem(cacheKey);
+    if (cachedValue) {
+      const cached = JSON.parse(cachedValue);
+      if (
+        typeof cached.count === "number" &&
+        Number.isInteger(cached.count) &&
+        typeof cached.checkedAt === "number" &&
+        Number.isFinite(cached.checkedAt)
+      ) {
+        displayedCount = cached.count;
+        checkedAt = cached.checkedAt;
+        label.textContent = `${cached.count.toLocaleString("en-US")} stars`;
+      }
     }
   } catch {
-    // The static project copy remains useful when GitHub rate-limits the request.
+    // The static count remains visible when storage is unavailable or invalid.
+  }
+
+  if (Date.now() - checkedAt < githubStarCacheTtl) return;
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${repository}`, {
+      headers: { Accept: "application/vnd.github+json" },
+    });
+    if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
+
+    const data = await response.json();
+    if (!Number.isInteger(data.stargazers_count)) throw new Error("Invalid GitHub response");
+
+    displayedCount = data.stargazers_count;
+    label.textContent = `${data.stargazers_count.toLocaleString("en-US")} stars`;
+    saveCache(data.stargazers_count);
+  } catch {
+    // Keep the last value and avoid retrying until the next cache window.
+    saveCache(displayedCount);
   }
 });
