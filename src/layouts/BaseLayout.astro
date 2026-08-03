@@ -43,6 +43,18 @@ const socialImage = new URL(image, Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon-robot-transparent.png" type="image/png" sizes="512x512" />
     <style is:inline>
+      html,
+      body,
+      .hero,
+      [data-latent-field] {
+        background: #0d0d0c;
+        color-scheme: dark;
+      }
+
+      [data-latent-field] canvas {
+        background: #0d0d0c;
+      }
+
       html.is-loading body {
         visibility: hidden;
         opacity: 0;

@@ -359,6 +359,9 @@
 
     window.addEventListener("pagehide", () => {
       renderer.setAnimationLoop(null);
+      canvas.style.backgroundColor = "#0d0d0c";
+      renderer.setClearColor(0x0d0d0c, 1);
+      renderer.clear();
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
       pointGeometry.dispose();

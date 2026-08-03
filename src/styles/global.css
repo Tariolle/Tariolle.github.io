@@ -15,26 +15,6 @@
   color-scheme: dark;
 }
 
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-old(root) {
-  animation: 180ms ease both fade-out;
-}
-
-::view-transition-new(root) {
-  animation: 340ms ease both fade-in;
-}
-
-@keyframes fade-out {
-  to { opacity: 0; }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-}
-
 *,
 *::before,
 *::after {
@@ -501,6 +481,7 @@ h3 {
   position: relative;
   min-height: 100svh;
   padding: calc(var(--header-height) + 2rem) var(--page-x) 3rem;
+  background: var(--ink);
   border-bottom: 1px solid var(--line);
   isolation: isolate;
 }
@@ -581,12 +562,14 @@ h3 {
   z-index: 1;
   inset: var(--header-height) 0 0;
   overflow: hidden;
+  background: var(--ink);
   pointer-events: auto;
 }
 
 .latent-field canvas {
   width: 100%;
   height: 100%;
+  background: var(--ink);
 }
 
 .home-section,
@@ -817,8 +800,7 @@ h3 {
 }
 
 .publication-feature--single .publication-card {
-  width: min(100%, 64rem);
-  margin-left: auto;
+  width: 100%;
 }
 
 .publication-card {
