@@ -18,7 +18,15 @@ export interface WorkItem {
   stars?: number;
 }
 
-export const workItems: WorkItem[] = [
+const workOrder = [
+  "DashVMC",
+  "Geometry-Aware Joint-Embedding EEG",
+  "Opportunistic Target Selection",
+  "VisualTorch",
+  "Rose",
+];
+
+export const workItems = ([
   {
     title: "Opportunistic Target Selection",
     year: "05.2026",
@@ -91,4 +99,4 @@ export const workItems: WorkItem[] = [
     stars: 316,
     links: [{ label: "Code", href: "https://github.com/willyfh/visualtorch" }],
   },
-];
+] satisfies WorkItem[]).sort((a, b) => workOrder.indexOf(a.title) - workOrder.indexOf(b.title));

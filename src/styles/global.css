@@ -723,6 +723,12 @@ h3 {
   font-size: clamp(1rem, 1.4vw, 1.2rem);
 }
 
+.not-found h1 {
+  max-width: none;
+  font-size: clamp(3.22rem, 5.52vw, 5.52rem);
+  white-space: nowrap;
+}
+
 .not-found-content .text-link {
   margin-top: 1.25rem;
 }
@@ -1546,6 +1552,11 @@ h3 {
   .page-hero h1 {
     font-size: clamp(3.7rem, 16vw, 5.2rem);
     line-height: 0.9;
+  }
+
+  .not-found h1 {
+    font-size: 2.7025rem;
+    white-space: normal;
   }
 
   .listing-card .publication-meta {
