@@ -6,18 +6,34 @@ gsap.registerPlugin(ScrollTrigger);
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const header = document.querySelector<HTMLElement>("[data-site-header]");
-let lastScroll = window.scrollY;
 
 const updateHeader = () => {
   if (!header) return;
-  const current = window.scrollY;
-  header.classList.toggle("is-compact", current > 32);
-  header.classList.toggle("is-hidden", current > lastScroll && current > 220);
-  lastScroll = current;
+  header.classList.toggle("is-compact", window.scrollY > 32);
 };
 
 window.addEventListener("scroll", updateHeader, { passive: true });
 updateHeader();
+
+const alignHashTarget = () => {
+  const targetId = window.location.hash.slice(1);
+  if (!targetId) return;
+
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  window.requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = "auto";
+    target.scrollIntoView({ block: "start" });
+    document.documentElement.style.removeProperty("scroll-behavior");
+  });
+};
+
+if (document.documentElement.classList.contains("is-ready")) {
+  alignHashTarget();
+} else {
+  document.addEventListener("site:ready", alignHashTarget, { once: true });
+}
 
 const startAnimations = () => {
   const heroTitle = document.querySelector<HTMLElement>("[data-hero-title]");

@@ -1,59 +1,44 @@
 ---
+import RobotMark from "./RobotMark.astro";
+
 interface Props {
-  activePage?: "home" | "projects" | "publications" | "cv" | undefined;
+  activePage?: "home" | "cv" | undefined;
 }
 
 const { activePage } = Astro.props;
+const sectionHref = (section: string) => activePage === "home" ? `#${section}` : `/#${section}`;
 
 const links = [
-  { label: "About", href: "/#about", page: "home" },
-  { label: "Work", href: "/projects/", page: "projects" },
-  { label: "Publications", href: "/publications/", page: "publications" },
-  { label: "CV", href: "/cv/", page: "cv" },
+  { label: "About", href: sectionHref("home-section"), page: "home", section: "home-section" },
+  { label: "Work", href: sectionHref("work"), page: undefined, section: "work" },
+  { label: "CV", href: "/cv/", page: "cv", section: undefined },
 ] as const;
 ---
 
 <header class="site-header" data-site-header>
-  <a class="graph-mark" href="/" aria-label="Florent Tariolle, home">
-    <span class="graph-mark-inner" aria-hidden="true">
-      <span class="graph-edge graph-edge--1"></span>
-      <span class="graph-edge graph-edge--2"></span>
-      <span class="graph-edge graph-edge--3"></span>
-      <span class="graph-edge graph-edge--4"></span>
-      <span class="graph-edge graph-edge--5"></span>
-      <span class="graph-edge graph-edge--6"></span>
-      <span class="graph-edge graph-edge--7"></span>
-      <span class="graph-edge graph-edge--8"></span>
-      <span class="graph-edge graph-edge--9"></span>
-      <span class="graph-edge graph-edge--10"></span>
-      <span class="graph-edge graph-edge--11"></span>
-      <span class="graph-edge graph-edge--12"></span>
-      <span class="graph-node graph-node--1"></span>
-      <span class="graph-node graph-node--2"></span>
-      <span class="graph-node graph-node--3"></span>
-      <span class="graph-node graph-node--4"></span>
-      <span class="graph-node graph-node--5"></span>
-      <span class="graph-node graph-node--6"></span>
-      <span class="graph-node graph-node--7"></span>
-    </span>
-  </a>
+  <div class="site-header-inner">
+    <a class="site-mark" href="/" aria-label="Florent Tariolle, home">
+      <RobotMark />
+    </a>
 
-  <nav class="desktop-nav" aria-label="Primary navigation">
-    {links.map((link) => (
-      <a
-        class:list={["nav-link", { active: activePage === link.page }]}
-        href={link.href}
-        aria-current={activePage === link.page ? "page" : undefined}
-      >
-        {link.label}
-      </a>
-    ))}
-  </nav>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {links.map((link) => (
+        <a
+          class:list={["nav-link", { active: Boolean(link.page && activePage === link.page) }]}
+          href={link.href}
+          aria-current={link.page && activePage === link.page ? (link.section ? "location" : "page") : undefined}
+          data-nav-section={link.section}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
 
-  <button class="menu-trigger" popovertarget="mobile-menu" aria-label="Open navigation">
-    <span>Menu</span>
-    <span class="menu-trigger-lines" aria-hidden="true"></span>
-  </button>
+    <button class="menu-trigger" popovertarget="mobile-menu" aria-label="Open navigation">
+      <span>Menu</span>
+      <span class="menu-trigger-lines" aria-hidden="true"></span>
+    </button>
+  </div>
 
   <div class="mobile-menu" id="mobile-menu" popover>
     <div class="mobile-menu-top">
@@ -71,3 +56,49 @@ const links = [
     <p>Deep learning research<br />Rouen, France</p>
   </div>
 </header>
+
+<script>
+  const mobileMenu = document.querySelector<HTMLElement>("#mobile-menu");
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => mobileMenu.hidePopover());
+  });
+
+  const sectionLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-nav-section]"),
+  );
+  const sections = sectionLinks
+    .map((link) => {
+      const id = link.dataset.navSection;
+      return id ? document.getElementById(id) : null;
+    })
+    .filter((section): section is HTMLElement => section !== null);
+
+  if (sectionLinks.length && sections.length) {
+    let frame = 0;
+
+    const updateActiveSection = () => {
+      frame = 0;
+      const threshold = window.innerHeight * 0.42;
+      const activeSection = sections
+        .filter((section) => section.getBoundingClientRect().top <= threshold)
+        .at(-1)?.id ?? sections[0]?.id;
+
+      sectionLinks.forEach((link) => {
+        const active = link.dataset.navSection === activeSection;
+        link.classList.toggle("active", active);
+        active
+          ? link.setAttribute("aria-current", "location")
+          : link.removeAttribute("aria-current");
+      });
+    };
+
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    updateActiveSection();
+  }
+</script>

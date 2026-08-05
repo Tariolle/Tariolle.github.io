@@ -1,0 +1,76 @@
+---
+import RobotMark from "./RobotMark.astro";
+import WorkRow from "./WorkRow.astro";
+import { workItems } from "../data/work";
+
+const filters = [
+  { value: "all", label: "All work" },
+  { value: "research", label: "Research" },
+  { value: "publications", label: "Publications" },
+  { value: "patents", label: "Patents" },
+  { value: "projects", label: "Projects" },
+] as const;
+---
+
+<section class="work-index" id="work" aria-labelledby="work-title" data-work-index>
+  <header class="work-index-intro">
+    <span class="work-hero-mark"><RobotMark /></span>
+    <h2 id="work-title">Selected <em>Work.</em></h2>
+    <div class="work-intro-copy">
+      <p>Research is where I turn difficult questions into working systems.</p>
+      <p>Explore publications, independent research, patents, and engineering projects.</p>
+    </div>
+    <div class="work-intro-actions">
+      <a class="work-button work-button--primary" href="/cv/">View my CV</a>
+      <a class="work-button" href="mailto:florent.tariolle@gmail.com">
+        Get in touch <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="work-toolbar">
+    <div class="work-filters" role="group" aria-label="Filter work by type">
+      {filters.map((filter) => (
+        <button
+          class:list={["work-filter", { "is-active": filter.value === "all" }]}
+          type="button"
+          data-work-filter={filter.value}
+          aria-pressed={filter.value === "all" ? "true" : "false"}
+        >
+          {filter.label}
+        </button>
+      ))}
+    </div>
+
+    <div class="work-toolbar-meta">
+      <p class="sr-only" aria-live="polite" data-work-count>
+        {workItems.length} results
+      </p>
+      <label class="work-search">
+        <span class="sr-only">Search work</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="m16 16 4 4"></path>
+        </svg>
+        <input type="search" placeholder="Search work" autocomplete="off" data-work-search />
+      </label>
+    </div>
+  </div>
+
+  <div class="work-index-list" data-work-list>
+    {workItems.map((item) => <WorkRow item={item} />)}
+  </div>
+
+  <div class="work-empty" hidden data-work-empty>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 3.75h7l3 3V20.25H7z"></path>
+      <path d="M14 3.75v3h3M9.5 11h5M9.5 14h5"></path>
+    </svg>
+    <h2 data-work-empty-title>No public patent work yet.</h2>
+    <p data-work-empty-copy>Public patent work will appear here once it is available.</p>
+  </div>
+</section>
+
+<script>
+  import "../scripts/work";
+</script>

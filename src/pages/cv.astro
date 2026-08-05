@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
 
 const cvPdf = "/documents/florent-tariolle-cv.pdf";
 ---
@@ -19,7 +20,23 @@ const cvPdf = "/documents/florent-tariolle-cv.pdf";
       </div>
     </div>
     <div class="cv-frame-wrap" data-reveal>
-      <iframe class="cv-frame" src={cvPdf} title="Florent Tariolle curriculum vitae"></iframe>
+      <a
+        class="cv-preview-link"
+        href={cvPdf}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Open Florent Tariolle's curriculum vitae as a PDF"
+      >
+        <img
+          class="cv-preview"
+          src="/images/cv-preview.png"
+          width="1654"
+          height="2339"
+          alt="Preview of Florent Tariolle's curriculum vitae"
+          decoding="async"
+        />
+      </a>
     </div>
   </section>
+  <Footer />
 </BaseLayout>

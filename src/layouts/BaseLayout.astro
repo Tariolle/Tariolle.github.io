@@ -1,22 +1,21 @@
 ---
-import "@fontsource/instrument-serif/400.css";
-import "@fontsource/instrument-serif/400-italic.css";
-import "@fontsource-variable/manrope";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/newsreader";
 import Nav from "../components/Nav.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
-  page?: "home" | "projects" | "publications" | "cv";
+  page?: "home" | "cv";
   image?: string;
 }
 
 const {
-  title = "Florent Tariolle - About",
+  title = "Florent Tariolle - Research",
   description = "Florent Tariolle works on representation learning, world models, reinforcement learning, and self-supervised learning.",
   page,
-  image = "/images/og-portfolio.png",
+  image = "/images/og-portfolio-light.png",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -24,12 +23,12 @@ const socialImage = new URL(image, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" class="is-loading">
+<html lang="en" class="is-loading" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0d0d0c" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="author" content="Florent Tariolle" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -47,12 +46,12 @@ const socialImage = new URL(image, Astro.site);
       body,
       .hero,
       [data-latent-field] {
-        background: #0d0d0c;
-        color-scheme: dark;
+        background: #ffffff;
+        color-scheme: light;
       }
 
       [data-latent-field] canvas {
-        background: #0d0d0c;
+        background: #ffffff;
       }
 
       html.is-loading body {
