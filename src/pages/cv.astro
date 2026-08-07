@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
 
 const cvPdf = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/refs/heads/master/main.pdf";
+const cvViewer = "https://github.com/Tariolle/curriculum-vitae/blob/master/main.pdf";
 ---
 
 <BaseLayout
@@ -15,14 +16,14 @@ const cvPdf = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/refs/
     <div class="cv-toolbar" data-reveal>
       <p class="eyebrow">CURRICULUM VITAE</p>
       <div class="cv-actions">
-        <a class="text-link" href={cvPdf} target="_blank" rel="noreferrer">Open PDF ↗</a>
+        <a class="text-link" href={cvViewer} target="_blank" rel="noreferrer">Open PDF ↗</a>
         <a class="text-link" href={cvPdf}>Download PDF ↓</a>
       </div>
     </div>
     <div class="cv-frame-wrap" data-reveal>
       <a
         class="cv-preview-link"
-        href={cvPdf}
+        href={cvViewer}
         target="_blank"
         rel="noreferrer"
         aria-label="Open Florent Tariolle's curriculum vitae as a PDF"
