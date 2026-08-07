@@ -91,7 +91,7 @@ export const workItems = ([
     year: "2026",
     categories: ["projects"],
     labels: ["Project", "Open source"],
-    context: "Maintainer · PyTorch Ecosystem",
+    context: "Maintainer · MCP integration",
     description:
       "An official PyTorch Ecosystem project for visualizing neural-network architectures. I maintain the project and designed and implemented its MCP integration for generating editable diagrams from model definitions.",
     details: ["PyTorch · Visualization", "Official ecosystem project"],
