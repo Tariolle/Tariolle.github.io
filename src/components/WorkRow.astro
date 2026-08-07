@@ -15,7 +15,8 @@ const searchableText = [
   ...item.labels,
   ...item.details,
 ].join(" ").toLowerCase();
-const context = [item.details[0], item.context].filter(Boolean).join(" · ");
+const contextParts = item.contextFirst ? [item.context, item.details[0]] : [item.details[0], item.context];
+const context = contextParts.filter(Boolean).join(" · ");
 ---
 
 <article

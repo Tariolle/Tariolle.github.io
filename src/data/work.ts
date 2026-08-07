@@ -11,6 +11,7 @@ export interface WorkItem {
   categories: WorkFilter[];
   labels: string[];
   context: string;
+  contextFirst?: boolean;
   description: string;
   details: string[];
   links: [WorkLink, ...WorkLink[]];
@@ -79,6 +80,7 @@ export const workItems = ([
     categories: ["projects"],
     labels: ["Project", "Engineering"],
     context: "Co-founder · Lead developer",
+    contextFirst: true,
     description:
       "A high-traffic real-time customization tool whose Python backend, Cloudflare Workers relay, and browser integration serve more than 25,000 daily active users.",
     details: ["25K+ daily active users", "6-person team"],
@@ -94,7 +96,7 @@ export const workItems = ([
     context: "Maintainer · MCP integration",
     description:
       "An official PyTorch Ecosystem project for visualizing neural-network architectures. I maintain the project and designed and implemented its MCP integration for generating editable diagrams from model definitions.",
-    details: ["PyTorch · Visualization", "Official ecosystem project"],
+    details: ["PyTorch", "Official ecosystem project"],
     repo: "willyfh/visualtorch",
     stars: 316,
     links: [
