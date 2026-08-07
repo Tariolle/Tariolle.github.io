@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync:cv": "node scripts/sync-cv.mjs",
+    "predev": "pnpm sync:cv",
     "dev": "astro dev",
+    "prebuild": "pnpm sync:cv",
     "build": "astro check && astro build",
     "preview": "astro preview"
   },

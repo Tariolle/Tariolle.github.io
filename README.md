@@ -10,4 +10,4 @@ pnpm dev
 pnpm build
 ```
 
-Projects are defined in `src/data/work.ts`; the CV is loaded from `Tariolle/curriculum-vitae`. Pushes to `main` deploy through GitHub Actions.
+Projects are defined in `src/data/work.ts`; the CV is synchronized from `Tariolle/curriculum-vitae` at build time. Pushes and hourly builds deploy through GitHub Actions.
