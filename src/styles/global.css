@@ -1313,15 +1313,32 @@ h3 {
 }
 
 .cv-preview-link {
+  position: relative;
   display: block;
   width: min(100%, 72rem);
+  aspect-ratio: 210 / 297;
   border: 1px solid var(--line);
   background: #fff;
 }
 
 .cv-preview {
+  display: block;
   width: 100%;
   height: auto;
+}
+
+.cv-preview-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.cv-preview-status[hidden] {
+  display: none;
 }
 
 @media (max-width: 900px) {
