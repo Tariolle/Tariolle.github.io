@@ -91,12 +91,15 @@ export const workItems = ([
     year: "2026",
     categories: ["projects"],
     labels: ["Project", "Open source"],
-    context: "Maintainer · MCP integration",
+    context: "Maintainer · PyTorch Ecosystem",
     description:
-      "An open-source PyTorch architecture-visualization library whose MCP integration generates editable neural-network diagrams from model definitions.",
-    details: ["PyTorch · Visualization", "Open-source maintenance"],
+      "An official PyTorch Ecosystem project for visualizing neural-network architectures. I maintain the project and designed and implemented its MCP integration for generating editable diagrams from model definitions.",
+    details: ["PyTorch · Visualization", "Official ecosystem project"],
     repo: "willyfh/visualtorch",
     stars: 316,
-    links: [{ label: "Code", href: "https://github.com/willyfh/visualtorch" }],
+    links: [
+      { label: "Documentation", href: "https://visualtorch.readthedocs.io/en/latest/" },
+      { label: "Code", href: "https://github.com/willyfh/visualtorch" },
+    ],
   },
 ] satisfies WorkItem[]).sort((a, b) => workOrder.indexOf(a.title) - workOrder.indexOf(b.title));
