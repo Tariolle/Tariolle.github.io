@@ -14,12 +14,13 @@ export interface WorkItem {
   contextFirst?: boolean;
   description: string;
   details: string[];
-  links: [WorkLink, ...WorkLink[]];
+  links: WorkLink[];
   repo?: string;
   stars?: number;
 }
 
 const workOrder = [
+  "Neural Network for Adaptive Bilateral Filtering",
   "DashVMC",
   "Geometry-Aware Joint-Embedding EEG",
   "Opportunistic Target Selection",
@@ -28,6 +29,17 @@ const workOrder = [
 ];
 
 export const workItems = ([
+  {
+    title: "Neural Network for Adaptive Bilateral Filtering",
+    year: "07.2026",
+    categories: ["research", "patents"],
+    labels: ["Patent", "Research"],
+    context: "Patent application · Filed",
+    description:
+      "Neural-network adaptive bilateral filtering (ABIF) for reconstructed video blocks inside the in-loop filtering process, with learned filter-profile selection and encoder rate-distortion-driven signaling for decoder-side filtering.",
+    details: ["F. Lefebvre · F. Tariolle · F. Schnitzler · H. Guermoud · S. Yassin", "Filed July 2026"],
+    links: [],
+  },
   {
     title: "Opportunistic Target Selection",
     year: "05.2026",
@@ -67,8 +79,8 @@ export const workItems = ([
     labels: ["Research", "Project"],
     context: "Independent research",
     description:
-      "Real-time discrete world-model control in Geometry Dash using FSQ tokenization, action-conditioned transformer dynamics, and an actor-critic trained in latent rollouts.",
-    details: ["Manuscript in preparation", "World models · Control"],
+      "Real-time Geometry Dash control from pixels using an 8x8 FSQ token grid, action-conditioned transformer dynamics, and an actor-critic refined with PPO entirely in frozen-model rollouts.",
+    details: ["~2 hours offline gameplay", "60 FPS decoder-free deployment"],
     links: [
       { label: "Project page", href: "https://tariolle.github.io/dash-vmc/" },
       { label: "Code", href: "https://github.com/Tariolle/dash-vmc" },
