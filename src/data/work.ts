@@ -68,7 +68,7 @@ export const workItems = ([
     context: "Independent research",
     description:
       "Real-time Geometry Dash control from pixels using an 8x8 FSQ token grid, action-conditioned transformer dynamics, and an actor-critic refined with PPO entirely in frozen-model rollouts.",
-    details: ["~2 hours offline gameplay", "60 FPS decoder-free deployment"],
+    details: ["60 FPS decoder-free deployment"],
     links: [
       { label: "Project page", href: "https://tariolle.github.io/dash-vmc/" },
       { label: "Code", href: "https://github.com/Tariolle/dash-vmc" },
