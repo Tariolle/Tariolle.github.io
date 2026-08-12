@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
 const source = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/refs/heads/master/main.pdf";
-const outputDirectory = new URL("../public/cv/", import.meta.url);
+const outputDirectory = new URL("../public/", import.meta.url);
 const output = new URL("cv.pdf", outputDirectory);
 
 const response = await fetch(source);
