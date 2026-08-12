@@ -11,7 +11,6 @@ export interface WorkItem {
   categories: WorkFilter[];
   labels: string[];
   context: string;
-  contextFirst?: boolean;
   description: string;
   details: string[];
   links: WorkLink[];
@@ -80,7 +79,6 @@ export const workItems = ([
     categories: ["projects"],
     labels: ["Project", "Engineering"],
     context: "Co-founder · Lead developer",
-    contextFirst: true,
     description:
       "A high-traffic real-time customization tool whose Python backend, Cloudflare Workers relay, and browser integration serve more than 25,000 daily active users.",
     details: ["25K+ daily active users", "6-person team"],
