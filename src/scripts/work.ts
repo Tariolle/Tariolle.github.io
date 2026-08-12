@@ -41,11 +41,8 @@ if (root) {
 
     if (empty && emptyTitle && emptyCopy) {
       empty.hidden = visibleCount !== 0;
-      const patentView = activeFilter === "patents" && !query;
-      emptyTitle.textContent = patentView ? "No public patent work yet." : "No matching work.";
-      emptyCopy.textContent = patentView
-        ? "Public patent work will appear here once it is available."
-        : "Try another filter or search term.";
+      emptyTitle.textContent = "No matching work.";
+      emptyCopy.textContent = "Try another filter or search term.";
     }
 
     filters.forEach((filter) => {

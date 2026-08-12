@@ -1,4 +1,4 @@
-export type WorkFilter = "research" | "publications" | "patents" | "projects";
+export type WorkFilter = "research" | "publications" | "projects";
 
 export interface WorkLink {
   label: string;
@@ -20,7 +20,6 @@ export interface WorkItem {
 }
 
 const workOrder = [
-  "Neural Network for Adaptive Bilateral Filtering",
   "DashVMC",
   "Geometry-Aware Joint-Embedding EEG",
   "Opportunistic Target Selection",
@@ -29,17 +28,6 @@ const workOrder = [
 ];
 
 export const workItems = ([
-  {
-    title: "Neural Network for Adaptive Bilateral Filtering",
-    year: "07.2026",
-    categories: ["research", "patents"],
-    labels: ["Patent", "Research"],
-    context: "Patent application · Filed",
-    description:
-      "Neural-network adaptive bilateral filtering (ABIF) for reconstructed video blocks inside the in-loop filtering process, with learned filter-profile selection and encoder rate-distortion-driven signaling for decoder-side filtering.",
-    details: ["F. Lefebvre · F. Tariolle · F. Schnitzler · H. Guermoud · S. Yassin", "Filed July 2026"],
-    links: [],
-  },
   {
     title: "Opportunistic Target Selection",
     year: "05.2026",

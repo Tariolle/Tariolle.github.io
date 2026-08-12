@@ -7,7 +7,6 @@ const filters = [
   { value: "all", label: "All work" },
   { value: "research", label: "Research" },
   { value: "publications", label: "Publications" },
-  { value: "patents", label: "Patents" },
   { value: "projects", label: "Projects" },
 ] as const;
 ---
@@ -18,7 +17,7 @@ const filters = [
     <h2 id="work-title">Selected <em>Work.</em></h2>
     <div class="work-intro-copy">
       <p>Research is where I turn difficult questions into working systems.</p>
-      <p>Explore publications, independent research, patents, and engineering projects.</p>
+      <p>Explore publications, independent research, and engineering projects.</p>
     </div>
     <div class="work-intro-actions">
       <a class="work-button work-button--primary" href="/cv.pdf">View my CV</a>
@@ -66,8 +65,8 @@ const filters = [
       <path d="M7 3.75h7l3 3V20.25H7z"></path>
       <path d="M14 3.75v3h3M9.5 11h5M9.5 14h5"></path>
     </svg>
-    <h2 data-work-empty-title>No public patent work yet.</h2>
-    <p data-work-empty-copy>Public patent work will appear here once it is available.</p>
+    <h2 data-work-empty-title>No matching work.</h2>
+    <p data-work-empty-copy>Try another filter or search term.</p>
   </div>
 </section>
 
