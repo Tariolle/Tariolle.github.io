@@ -50,10 +50,10 @@ export const workItems = ([
     year: "06.2026",
     categories: ["research", "projects"],
     labels: ["Research", "Project"],
-    context: "Hackathon finalist",
+    context: "Hackathon finalist · Top 5/25 teams",
     description:
-      "Developed at Hack the World(s), a Yann LeCun-sponsored 24-hour challenge centered on JEPAs and world models: a compact self-supervised EEG pipeline combining SIGReg frozen-transfer baselines with Riemannian analysis of structure in SPD covariance representations.",
-    details: ["Hack the World(s)", "24-hour team project"],
+      "Selected as one of 100 participants from 650+ applicants for a Yann LeCun-sponsored 24-hour challenge bringing together students from France's leading engineering schools and universities; placed among the top 5 of 25 teams. Built a geometry-aware joint-embedding EEG SSL system with SIGReg frozen-transfer baselines and Riemannian analysis of SPD covariance representations.",
+    details: ["650+ applicants · 100 participants", "Top 5 of 25 teams"],
     links: [
       { label: "Code", href: "https://github.com/Tariolle/hello-worlds" },
       { label: "Deck", href: "https://github.com/Tariolle/hello-worlds/blob/main/presentation/main.pdf" },
@@ -61,13 +61,13 @@ export const workItems = ([
   },
   {
     title: "DashVMC",
-    year: "2026",
-    categories: ["research", "projects"],
-    labels: ["Research", "Project"],
-    context: "Independent research",
+    year: "08.2026",
+    categories: ["research", "publications"],
+    labels: ["Publication", "Research"],
+    context: "NeurIPS 2026 Workshop PTA · Submitted",
     description:
       "Real-time Geometry Dash control from pixels using an 8x8 FSQ token grid, action-conditioned transformer dynamics, and an actor-critic refined with PPO entirely in frozen-model rollouts.",
-    details: ["60 FPS decoder-free deployment"],
+    details: ["F. Tariolle · F. Yger", "60 FPS decoder-free deployment"],
     links: [
       { label: "Project page", href: "https://tariolle.github.io/dash-vmc/" },
       { label: "Code", href: "https://github.com/Tariolle/dash-vmc" },
@@ -80,8 +80,8 @@ export const workItems = ([
     labels: ["Project", "Engineering"],
     context: "Co-founder · Lead developer",
     description:
-      "A high-traffic real-time customization tool whose Python backend, Cloudflare Workers relay, and browser integration serve more than 25,000 daily active users.",
-    details: ["25K+ daily active users", "6-person team"],
+      "Co-founded and lead a six-person team behind a real-time customization tool used by more than 25,000 people daily and earning 400+ GitHub stars.",
+    details: ["25K+ daily active users", "400+ GitHub stars", "6-person team"],
     repo: "Alban1911/Rose",
     stars: 400,
     links: [{ label: "Code", href: "https://github.com/Alban1911/Rose" }],
