@@ -21,7 +21,7 @@ Independent research project on real-time discrete world model control in Geomet
 
 [Code](https://github.com/Alban1911/Rose)
 
-Open-source, high-traffic real-time customization tool. I co-founded the project, led development, coordinated a six-person team, and designed core Python backend, Cloudflare Workers WebSocket relay, and browser-side JavaScript integration. The project is active and used by 25K+ daily active users.
+Open-source, high-traffic real-time customization tool. I co-founded the project, led development, coordinated a six-person team, and designed core Python backend, Cloudflare Workers WebSocket relay, and browser-side JavaScript integration. The project is active and used by 30K+ daily active users.
 
 <h2>VisualTorch <span class="project-stars" data-github-repo="willyfh/visualtorch" aria-live="polite">&bull; stars</span></h2>
 
