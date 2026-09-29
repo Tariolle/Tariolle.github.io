@@ -83,7 +83,7 @@ export const workItems = ([
       "Co-founded and lead a six-person team behind a real-time customization tool used by more than 30,000 people daily.",
     details: ["30K+ daily active users", "6-person team"],
     repo: "Alban1911/Rose",
-    stars: 400,
+    stars: 600,
     links: [{ label: "Code", href: "https://github.com/Alban1911/Rose" }],
   },
   {
