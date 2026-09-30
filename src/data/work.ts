@@ -64,7 +64,7 @@ export const workItems = ([
     year: "08.2026",
     categories: ["research", "publications"],
     labels: ["Publication", "Research"],
-    context: "NeurIPS 2026 · PTA workshop · Accepted",
+    context: "PTA workshop · NeurIPS 2026",
     description:
       "Real-time Geometry Dash control from pixels using an 8x8 FSQ token grid, action-conditioned transformer dynamics, and an actor-critic refined with PPO entirely in frozen-model rollouts.",
     details: ["F. Tariolle · F. Yger", "PTA: From Pretrained Representations to Acting Agents", "60 FPS decoder-free deployment"],
