@@ -63,8 +63,8 @@ export const workItems = ([
     title: "DashVMC",
     year: "08.2026",
     categories: ["research", "publications"],
-    labels: ["Publication", "Research"],
-    context: "NeurIPS 2026 Workshop PTA · Submitted",
+    labels: ["Technical report", "Research"],
+    context: "Technical report",
     description:
       "Real-time Geometry Dash control from pixels using an 8x8 FSQ token grid, action-conditioned transformer dynamics, and an actor-critic refined with PPO entirely in frozen-model rollouts.",
     details: ["F. Tariolle · F. Yger", "60 FPS decoder-free deployment"],
