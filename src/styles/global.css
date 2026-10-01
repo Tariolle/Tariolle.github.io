@@ -337,7 +337,7 @@ h3 {
 }
 
 .hero {
-  --hero-height: max(40rem, 90svh);
+  --hero-height: max(40rem, 100dvh);
 
   position: relative;
   min-height: var(--hero-height);
@@ -590,9 +590,9 @@ h3 {
 
 .about-copy {
   display: grid;
-  grid-template-columns: minmax(15rem, 0.75fr) minmax(0, 1.25fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr);
   align-items: start;
-  column-gap: clamp(3rem, 4vw, 4rem);
+  column-gap: clamp(2rem, 3vw, 3rem);
 }
 
 .about-copy h2,
@@ -607,10 +607,11 @@ h3 {
 }
 
 .about-copy h2 {
-  max-width: 13ch;
+  max-width: 18ch;
   margin: 0;
-  font-size: clamp(2.35rem, 2.8vw, 3rem);
-  line-height: 1;
+  font-size: clamp(2rem, 2.5vw, 2.4rem);
+  line-height: 1.12;
+  text-wrap: balance;
 }
 
 .about-copy-body {
@@ -641,24 +642,26 @@ h3 {
   color: var(--signal);
 }
 
-.availability {
-  display: block;
-  width: fit-content;
-  max-width: 100%;
-  grid-column: 1 / -1;
-  justify-self: center;
-  margin: 2rem auto 0;
+.about-copy-body .availability {
+  display: grid;
+  grid-template-columns: 0.375rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  margin: 0.5rem 0 0;
   color: var(--paper);
   font-family: var(--work-font-sans);
-  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.005em;
-  line-height: 1.5;
-  text-align: center;
-  text-decoration-line: underline;
-  text-decoration-color: var(--signal);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.35em;
+  line-height: 1.6;
+}
+
+.availability::before {
+  width: 0.375rem;
+  height: 0.375rem;
+  margin-top: 0.6em;
+  border-radius: 50%;
+  background: var(--signal);
+  content: "";
 }
 
 .publication-feature {
@@ -1530,7 +1533,7 @@ h3 {
   }
 
   .hero {
-    --hero-height: max(36rem, 82svh);
+    --hero-height: max(36rem, 100dvh);
 
     padding-bottom: 4rem;
   }
@@ -1580,21 +1583,12 @@ h3 {
   }
 
   .about-copy h2 {
-    max-width: 15ch;
     margin-bottom: 1.5rem;
-    font-size: clamp(2.2rem, 9.5vw, 2.5rem);
-    line-height: 1;
+    font-size: clamp(1.9rem, 8vw, 2.2rem);
   }
 
   .publication-feature h2 {
     font-size: clamp(3.2rem, 14vw, 4.8rem);
-  }
-
-  .availability {
-    margin: 2rem auto 0;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    text-underline-offset: 0.3em;
   }
 
   .page-hero {
