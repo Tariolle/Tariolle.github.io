@@ -23,7 +23,7 @@ const socialImage = new URL(image, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" class="is-loading" data-theme="light">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -53,57 +53,7 @@ const socialImage = new URL(image, Astro.site);
       [data-latent-field] canvas {
         background: #ffffff;
       }
-
-      html.is-loading body {
-        visibility: hidden;
-        opacity: 0;
-      }
-
-      html.is-ready body {
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 180ms ease;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html.is-ready body {
-          transition: none;
-        }
-      }
     </style>
-    <noscript>
-      <style is:inline>
-        html.is-loading body {
-          visibility: visible;
-          opacity: 1;
-        }
-      </style>
-    </noscript>
-    <script is:inline>
-      (() => {
-        const root = document.documentElement;
-        let revealed = false;
-
-        const reveal = () => {
-          if (revealed) return;
-          revealed = true;
-          window.clearTimeout(fallback);
-          root.classList.remove("is-loading");
-          root.classList.add("is-ready");
-          document.dispatchEvent(new Event("site:ready"));
-        };
-
-        const pageLoaded = document.readyState === "complete"
-          ? Promise.resolve()
-          : new Promise((resolve) => window.addEventListener("load", resolve, { once: true }));
-
-        pageLoaded
-          .then(() => document.fonts?.ready)
-          .then(reveal, reveal);
-
-        const fallback = window.setTimeout(reveal, 5000);
-      })();
-    </script>
     <title>{title}</title>
   </head>
   <body data-page={page}>
