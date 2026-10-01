@@ -7,13 +7,13 @@ redirect_from:
   - /about.html
 ---
 
-I am an engineering student in Computer Science and Artificial Intelligence at [INSA Rouen Normandy](https://www.insa-rouen.fr/) and an incoming Master's student in Machine Learning for Artificial Intelligence at the [University of Rouen Normandy](https://mastersd.univ-rouen.fr/mlai.php).
+I am an engineering student in Computer Science and Artificial Intelligence at [INSA Rouen Normandy](https://www.insa-rouen.fr/) and a Master's student in Machine Learning for Artificial Intelligence at the [University of Rouen Normandy](https://mastersd.univ-rouen.fr/mlai.php).
 
-My current internships apply deep learning to different domains: at [InterDigital](https://www.interdigital.com/video-lab/video-codec-research), I work on methods for next-generation video compression, with emphasis on VVC (H.266) in-loop filtering and decoder-side filter selection; at [Enedis](https://www.enedis.fr/), I work on generative modeling and large-scale pipelines for high-frequency electricity-grid time-series simulation.
+At [InterDigital](https://www.interdigital.com/video-lab/video-codec-research), I researched learned decoder-side filter selection for VVC (H.266) video decoding and authored and filed more than 10 patent applications. At [Enedis](https://www.enedis.fr/), my part-time capstone project combines synthetic customer load profiles with measured substation data to build a grid digital twin, with ongoing work on spatial and temporal profile adjustments.
 
-Recent projects include [Hack the World(s)](https://github.com/Tariolle/hello-worlds), where our team was a finalist at a 24-hour hackathon on JEPAs and world models sponsored by Yann LeCun. We built a joint-embedding EEG SSL system with Riemannian latent analysis showing structure in SPD covariance representations. Other recent projects include [Opportunistic Target Selection](https://arxiv.org/abs/2605.25663), a lightweight wrapper for query-efficient score-based black-box adversarial attacks accepted at CAp 2026, and [DashVMC](https://tariolle.github.io/dash-vmc/), an independent research project on real-time discrete world model control in Geometry Dash.
+My recent work includes [DashVMC](https://arxiv.org/abs/2609.40003), a PTA workshop, NeurIPS 2026 paper on real-time discrete world-model control in Geometry Dash, and [Opportunistic Target Selection](https://arxiv.org/abs/2605.25663), a CAp 2026 paper on query-efficient score-based black-box adversarial attacks. Our team was also a finalist at [Hack the World(s)](https://github.com/Tariolle/hello-worlds), a 24-hour hackathon on JEPAs and world models sponsored by Yann LeCun, where we built a joint-embedding EEG SSL system with Riemannian latent analysis.
 
-I am seeking a six-month final-year research internship in deep learning starting in 2027.
+I am seeking a six-month final-year research internship abroad in deep learning starting in April 2027.
 
 Research interests
 ======

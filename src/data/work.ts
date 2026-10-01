@@ -61,7 +61,7 @@ export const workItems = ([
   },
   {
     title: "DashVMC",
-    year: "08.2026",
+    year: "09.2026",
     categories: ["research", "publications"],
     labels: ["Publication", "Research"],
     context: "PTA workshop · NeurIPS 2026",
@@ -69,6 +69,7 @@ export const workItems = ([
       "Real-time Geometry Dash control from pixels using an 8x8 FSQ token grid, action-conditioned transformer dynamics, and an actor-critic refined with PPO entirely in frozen-model rollouts.",
     details: ["F. Tariolle · F. Yger", "PTA: From Pretrained Representations to Acting Agents", "60 FPS decoder-free deployment"],
     links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2609.40003" },
       { label: "Project page", href: "https://tariolle.github.io/dash-vmc/" },
       { label: "Code", href: "https://github.com/Tariolle/dash-vmc" },
     ],
