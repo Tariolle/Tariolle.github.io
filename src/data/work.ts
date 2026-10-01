@@ -52,7 +52,7 @@ export const workItems = ([
     labels: ["Research", "Project"],
     context: "Hackathon finalist · Top 5/25 teams",
     description:
-      "Selected as one of 100 participants from 650+ applicants for a Yann LeCun-sponsored 24-hour challenge bringing together students from France's leading engineering schools and universities; placed among the top 5 of 25 teams. Built a geometry-aware joint-embedding EEG SSL system with SIGReg frozen-transfer baselines and Riemannian analysis of SPD covariance representations.",
+      "Selected as one of 100 participants from 650+ applicants for a Yann LeCun-sponsored, 24-hour hackathon on JEPAs and world models. Our team finished among the top five of 25 teams. Built a model that learns from unlabeled EEG recordings. Explored whether training that respects the curved geometry of covariance matrices leads to more structured representations.",
     details: ["650+ applicants · 100 participants", "Top 5 of 25 teams"],
     links: [
       { label: "Code", href: "https://github.com/Tariolle/hello-worlds" },
