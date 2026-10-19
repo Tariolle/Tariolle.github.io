@@ -4,5 +4,5 @@
     "verbatimModuleSyntax": true
   },
   "include": [".astro/types.d.ts", "src/**/*", "astro.config.mjs"],
-  "exclude": ["dist", "_site", "node_modules"]
+  "exclude": ["dist", "node_modules"]
 }
