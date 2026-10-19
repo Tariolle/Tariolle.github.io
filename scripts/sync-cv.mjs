@@ -1,6 +1,8 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
-const source = "https://raw.githubusercontent.com/Tariolle/curriculum-vitae/refs/heads/master/main.pdf";
+// A commit SHA from the CV build avoids raw.githubusercontent.com serving a cached PDF.
+const ref = process.env.CV_REF || "refs/heads/master";
+const source = `https://raw.githubusercontent.com/Tariolle/curriculum-vitae/${ref}/main.pdf`;
 const outputDirectory = new URL("../public/", import.meta.url);
 const output = new URL("cv.pdf", outputDirectory);
 
