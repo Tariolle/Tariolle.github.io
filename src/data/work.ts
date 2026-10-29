@@ -76,7 +76,7 @@ export const workItems = ([
   },
   {
     title: "Rose",
-    year: "09–12.2025",
+    year: "2025",
     categories: ["projects"],
     labels: ["Project", "Engineering"],
     context: "Co-founder · Lead developer",
